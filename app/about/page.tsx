@@ -32,7 +32,7 @@ export default function AboutPage() {
               coberturas de testing superiores al 95%.
             </p>
             <p>
-              Cuento con experiencia sólida en infraestructura Cloud (AWS) y
+              Cuento con experiencia en infraestructura Cloud (AWS) y
               orquestación con Docker y Kubernetes para garantizar despliegues
               robustos y monitoreados.
             </p>

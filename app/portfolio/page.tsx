@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 
 const projects = [
   {
-    title: "Appointmetly - Sistema de Gestión de Citas",
+    title: "Appointmetly - Sistema de Gestión de Citas/Cuentas/Cobros",
     desc: "Plataforma de reservas en línea con backend en Go-Python y PostgreSQL.",
     tags: ["Go", "Python", "PostgreSQL", "Docker", "Kubernetes"],
     colors: ["rgb(147,51,234)", "rgb(0,255,255)"],

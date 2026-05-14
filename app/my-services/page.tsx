@@ -10,27 +10,22 @@ const technologies = [
 const services = [
   {
     title: "Páginas Web",
-    desc: "Desarrollo de sitios web modernos, rápidos y responsivos.",
+    desc: "Desarrollo de aplicaciones web completas con frontend moderno y backend robusto en Go, Python o Node.js.",
     icon: Globe,
   },
   {
-    title: "Apps Móviles",
-    desc: "Creación de aplicaciones funcionales para iOS y Android.",
-    icon: Smartphone,
-  },
-  {
     title: "Mantenimiento",
-    desc: "Mantenimiento básico y optimización de equipos de cómputo.",
+    desc: "Optimización, limpieza, formateo y actualización de equipos de cómputo para garantizar su rendimiento.",
     icon: Laptop,
   },
   {
     title: "Instalación de Apps",
-    desc: "Instalación y configuración de software a medida.",
+    desc: "Instalación y configuración de software de desarrollo, servidores, bases de datos y herramientas profesionales.",
     icon: Settings,
   },
   {
     title: "Soporte Técnico",
-    desc: "Asistencia remota y presencial para resolver cualquier problema.",
+    desc: "Asistencia remota y presencial en infraestructura TI: servidores, redes, despliegue de software, administración de sistemas y resolución de incidencias técnicas.",
     icon: Wrench,
   },
 ];

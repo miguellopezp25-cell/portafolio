@@ -16,7 +16,7 @@ export default function Home() {
         <h1 className="text-5xl md:text-7xl font-semibold text-foreground leading-tight">
           Hola, soy{" "}
           <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-purple-600">
-            Miguel
+            Miguel Lopez
           </span>
         </h1>
 
