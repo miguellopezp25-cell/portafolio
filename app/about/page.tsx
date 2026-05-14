@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Phone } from "lucide-react";
 
 export default function AboutPage() {
@@ -5,13 +6,14 @@ export default function AboutPage() {
     <section className="max-w-5xl mx-auto px-6 py-20">
       <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
         <div className="shrink-0">
-          <div className="size-56 rounded-2xl border-2 border-border bg-muted flex items-center justify-center overflow-hidden">
-            <div className="size-24 text-muted-foreground/40">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-full h-full">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
+          <div className="size-56 rounded-2xl border-2 border-border bg-card overflow-hidden">
+            <Image
+              src="/projects/photoofme.png"
+              alt="Foto de Miguel"
+              width={224}
+              height={224}
+              className="size-full object-cover"
+            />
           </div>
         </div>
 
