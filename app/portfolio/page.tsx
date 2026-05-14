@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 
 const projects = [
   {
-    title: "Appointmetly - Gestión de Citas",
+    title: "Appointmetly - Gestión de Citas empresariales y negocios",
     desc: "Backend modular en Go/Python. +30 APIs REST con 95% de test coverage y despliegue en AWS (EC2/S3).",
     tags: ["Go", "Python", "PostgreSQL", "Docker", "Kubernetes", "AWS"],
     colors: ["rgb(147,51,234)", "rgb(0,255,255)"],
@@ -23,7 +23,7 @@ const projects = [
   },
   {
     title: "Tattoo Studio - Reservas",
-    desc: "Plataforma Full Stack con Next.js. Interfaz responsiva y gestión de certificados SSL/Dominios.",
+    desc: "Plataforma Frontend para la gestión de reservas y portafolio. Interfaz responsiva y gestión de certificados SSL/Dominios.",
     tags: ["TypeScript", "Next.js", "React"],
     image: "/projects/tatuajes-1.png",
   },
