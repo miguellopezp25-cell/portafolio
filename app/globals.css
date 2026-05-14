@@ -1,26 +1,139 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+/* 1. Definición de variables CSS */
+@theme {
+  /* Registramos las variables para que Tailwind v4 las reconozca como utilidades */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-ring: hsl(var(--ring));
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colores base Dark */
+  --background: 260 40% 5%;
+  --foreground: 260 20% 95%;
+  --card: 260 40% 7%;
+  --card-foreground: 260 20% 95%;
+  --popover: 260 40% 5%;
+  --popover-foreground: 260 20% 95%;
+  --primary: 270 70% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 260 30% 15%;
+  --secondary-foreground: 260 20% 95%;
+  --muted: 260 30% 15%;
+  --muted-foreground: 260 10% 70%;
+  --accent: 270 70% 40%;
+  --accent-foreground: 260 20% 95%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 260 20% 95%;
+  --border: 270 50% 20%;
+  --input: 270 50% 20%;
+  --ring: 270 70% 60%;
+  --radius: 0.5rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.light {
+  --background: 0 0% 98%;
+  --foreground: 260 20% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 260 20% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 260 20% 10%;
+  --primary: 270 70% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 260 20% 90%;
+  --secondary-foreground: 260 20% 10%;
+  --muted: 260 20% 92%;
+  --muted-foreground: 260 10% 40%;
+  --accent: 270 70% 40%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 270 30% 80%;
+  --input: 270 30% 80%;
+  --ring: 270 70% 50%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Animación de gradiente neón para placeholders */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px -5px rgba(168,85,247,0.2), inset 0 0 15px -5px rgba(168,85,247,0.05);
+  }
+  50% {
+    box-shadow: 0 0 30px -3px rgba(168,85,247,0.4), inset 0 0 30px -3px rgba(168,85,247,0.1);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-gradient-shift {
+  background-size: 300% 300%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.animate-neon-pulse {
+  animation: neon-pulse 3s ease-in-out infinite;
+}
+
+/* Borde neón animado RGB */
+@keyframes border-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animated-border-wrapper {
+  position: relative;
+  padding: 3px;
+  overflow: hidden;
+  display: grid;
+}
+
+.animated-border-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    rgb(255, 0, 0),
+    rgb(0, 255, 0),
+    rgb(0, 0, 255),
+    rgb(255, 0, 255),
+    rgb(255, 0, 0)
+  );
+  animation: border-rotate 4s linear infinite;
+}
+
+.animated-border-content {
+  position: relative;
+  z-index: 1;
+  background: hsl(var(--card));
+}
+
+/* 2. Aplicación de estilos base */
+@layer base {
+  * {
+    /* En v4, si el apply falla, usamos CSS estándar para evitar errores de compilación */
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
