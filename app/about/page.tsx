@@ -26,7 +26,7 @@ export default function AboutPage() {
             <p>
               Ingeniero en Sistemas Computacionales con más de 3 años de
               experiencia especializado en el desarrollo de sistemas backend
-              escalables y de alto rendimiento. Experto en Golang, Python y
+              escalables y de alto rendimiento. Experiencia en Golang, Python y
               arquitecturas de microservicios, con un fuerte enfoque en la
               construcción modular de APIs y calidad de código, manteniendo
               coberturas de testing superiores al 95%.
