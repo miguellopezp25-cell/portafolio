@@ -1,40 +1,35 @@
 "use client"
-import { useState, type FormEvent } from "react"
 import { Button } from "@/components/ui/button"
-import { sendContact } from "@/lib/api"
-import { Send, CheckCircle, AlertCircle, Mail, Phone, User, MessageSquare } from "lucide-react"
+import { Send, Mail, Phone, User, MessageSquare } from "lucide-react"
 
 const subjects = [
-  { value: "cotizacion", label: "Cotización" },
-  { value: "asesoria", label: "Asesoría" },
-  { value: "producto", label: "Producto" },
-  { value: "pedido", label: "Pedido" },
-  { value: "otro", label: "Otro" },
+  { value: "Cotización", label: "Cotización" },
+  { value: "Asesoría", label: "Asesoría" },
+  { value: "Producto", label: "Producto" },
+  { value: "Pedido", label: "Pedido" },
+  { value: "Otro", label: "Otro" },
 ]
 
-export default function ContactoPage() {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    subject: "cotizacion",
-    message: "",
-  })
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
-  const [errorMsg, setErrorMsg] = useState("")
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "523328359296"
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setStatus("loading")
-    setErrorMsg("")
-    try {
-      await sendContact(form)
-      setStatus("success")
-      setForm({ name: "", phone: "", email: "", subject: "cotizacion", message: "" })
-    } catch {
-      setStatus("error")
-      setErrorMsg("No se pudo enviar el mensaje. Intenta de nuevo.")
-    }
+export default function ContactoPage() {
+  function handleSubmit(formData: FormData) {
+    const name = formData.get("name") as string
+    const phone = formData.get("phone") as string
+    const email = formData.get("email") as string
+    const subject = formData.get("subject") as string
+    const message = formData.get("message") as string
+
+    const text = `*Nuevo mensaje desde portafolio*
+
+*Nombre:* ${name}
+*Teléfono:* ${phone}
+*Correo:* ${email}
+*Asunto:* ${subject}
+*Mensaje:* ${message}`
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
+    window.open(url, "_blank")
   }
 
   return (
@@ -42,11 +37,11 @@ export default function ContactoPage() {
       <div className="space-y-2">
         <h1 className="text-4xl font-semibold text-foreground">Contacto</h1>
         <p className="text-muted-foreground">
-          Déjame un mensaje y te responderé a la brevedad.
+          Envíame un mensaje directo por WhatsApp.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form action={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium text-foreground flex items-center gap-2">
@@ -55,9 +50,8 @@ export default function ContactoPage() {
             </label>
             <input
               id="name"
+              name="name"
               required
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
               placeholder="Tu nombre"
             />
@@ -69,9 +63,8 @@ export default function ContactoPage() {
             </label>
             <input
               id="phone"
+              name="phone"
               required
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
               className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
               placeholder="33 1234 5678"
             />
@@ -85,10 +78,9 @@ export default function ContactoPage() {
           </label>
           <input
             id="email"
+            name="email"
             type="email"
             required
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
             className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
             placeholder="tu@correo.com"
           />
@@ -100,8 +92,7 @@ export default function ContactoPage() {
           </label>
           <select
             id="subject"
-            value={form.subject}
-            onChange={(e) => setForm({ ...form, subject: e.target.value })}
+            name="subject"
             className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
           >
             {subjects.map((s) => (
@@ -119,42 +110,20 @@ export default function ContactoPage() {
           </label>
           <textarea
             id="message"
+            name="message"
             required
             rows={5}
-            value={form.message}
-            onChange={(e) => setForm({ ...form, message: e.target.value })}
             className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all resize-none"
             placeholder="Escribe tu mensaje aquí..."
           />
         </div>
 
-        {status === "error" && (
-          <div className="flex items-center gap-2 text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3">
-            <AlertCircle size={16} />
-            {errorMsg}
-          </div>
-        )}
-
-        {status === "success" && (
-          <div className="flex items-center gap-2 text-sm text-green-400 bg-green-500/10 border border-green-500/30 rounded-lg px-4 py-3">
-            <CheckCircle size={16} />
-            Mensaje enviado correctamente. Te contactaré pronto.
-          </div>
-        )}
-
         <Button
           type="submit"
-          disabled={status === "loading"}
           className="bg-purple-600 hover:bg-purple-700 text-white gap-2 w-full sm:w-auto"
         >
-          {status === "loading" ? (
-            "Enviando..."
-          ) : (
-            <>
-              Enviar mensaje
-              <Send size={16} />
-            </>
-          )}
+          Enviar por WhatsApp
+          <Send size={16} />
         </Button>
       </form>
     </section>

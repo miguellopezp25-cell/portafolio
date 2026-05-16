@@ -26,22 +26,4 @@ export async function fetchQuote(data: {
   }>
 }
 
-export async function sendContact(data: {
-  name: string
-  phone: string
-  email: string
-  subject: string
-  message: string
-}) {
-  const res = await fetch(`${API_BASE}/contacto`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  })
-  if (!res.ok) throw new Error("Error al enviar mensaje")
-  return res.json() as Promise<{
-    success: boolean
-    message: string
-    data: Record<string, unknown>
-  }>
-}
+
