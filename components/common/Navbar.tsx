@@ -10,6 +10,8 @@ const links = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/my-services" },
   { name: "Portfolio", href: "/portfolio" },
+  { name: "Cotizar", href: "/cotizar" },
+  { name: "Contacto", href: "/contacto" },
 ];
 
 export default function Navbar() {
