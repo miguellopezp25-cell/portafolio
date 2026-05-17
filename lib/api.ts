@@ -7,15 +7,13 @@ export interface QuoteRequestPayload {
   type_of_project: ProjectType
   pages_or_modules: number
   interactive: boolean
-  auth: boolean
+  admin: boolean
   payments: boolean
   with_domain: boolean
   with_server: boolean
   seo: boolean
   copywriting: boolean
   responsive_premium: boolean
-  database: boolean
-  admin_panel: boolean
   maintenance: boolean
   deployment: boolean
   apis: APIType[]

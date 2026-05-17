@@ -5,7 +5,7 @@ import { fetchQuote } from "@/lib/api"
 import type { ProjectType, APIType } from "@/lib/api"
 import { Calculator, Check, X, Loader2, DollarSign } from "lucide-react"
 
-type BoolKey = "interactive" | "auth" | "payments" | "with_domain" | "with_server" | "seo" | "copywriting" | "responsive_premium" | "database" | "admin_panel" | "maintenance" | "deployment"
+type BoolKey = "interactive" | "admin" | "payments" | "with_domain" | "with_server" | "seo" | "copywriting" | "responsive_premium" | "maintenance" | "deployment"
 
 const projectTypes: { value: ProjectType; label: string; desc: string; price: number; includedPages: number }[] = [
   { value: "Visual Basic", label: "Visual Basic", desc: "Sitio sencillo, pocas páginas", price: 5000, includedPages: 3 },
@@ -25,10 +25,8 @@ const apiOptions: { value: APIType; label: string; price: number }[] = [
 const toggles: { key: BoolKey; label: string; group: string; price: number }[] = [
   // Funcionalidad
   { key: "interactive", label: "Interactividad", group: "Funcionalidad", price: 1500 },
-  { key: "auth", label: "Autenticación", group: "Funcionalidad", price: 3000 },
+  { key: "admin", label: "Admin", group: "Funcionalidad", price: 15000 },
   { key: "payments", label: "Pagos", group: "Funcionalidad", price: 5000 },
-  { key: "database", label: "Base de datos", group: "Funcionalidad", price: 5000 },
-  { key: "admin_panel", label: "Panel Admin", group: "Funcionalidad", price: 10000 },
   // Contenido y Marketing
   { key: "seo", label: "SEO", group: "Marketing", price: 2000 },
   { key: "copywriting", label: "Copywriting", group: "Marketing", price: 1500 },
@@ -44,15 +42,13 @@ const breakdownLabels: Record<string, string> = {
   type_of_project: "Tipo de proyecto",
   pages_or_modules: "Páginas / Módulos",
   interactive: "Interactividad",
-  auth: "Autenticación",
+  admin: "Admin",
   payments: "Pagos",
   with_domain: "Dominio",
   with_server: "Servidor",
   seo: "SEO",
   copywriting: "Copywriting",
   responsive_premium: "Responsive Premium",
-  database: "Base de datos",
-  admin_panel: "Panel Admin",
   maintenance: "Mantenimiento",
   deployment: "Despliegue",
   apis: "APIs",
@@ -65,15 +61,13 @@ export default function CotizarPage() {
     type_of_project: "Visual Basic" as ProjectType,
     pages_or_modules: 0,
     interactive: false,
-    auth: false,
+    admin: false,
     payments: false,
     with_domain: false,
     with_server: false,
     seo: false,
     copywriting: false,
     responsive_premium: false,
-    database: false,
-    admin_panel: false,
     maintenance: false,
     deployment: false,
     apis: [] as APIType[],
