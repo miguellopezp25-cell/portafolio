@@ -6,10 +6,10 @@ import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 
 const links = [
-  { name: "Main", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/my-services" },
-  { name: "Portfolio", href: "/portfolio" },
+  { name: "Inicio", href: "/" },
+  { name: "Sobre Mí", href: "/about" },
+  { name: "Servicios", href: "/my-services" },
+  { name: "Portafolio", href: "/portfolio" },
   { name: "Cotizar", href: "/cotizar" },
   { name: "Contacto", href: "/contacto" },
 ];
@@ -45,7 +45,7 @@ export default function Navbar() {
           <button
             className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label="Abrir menú"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>

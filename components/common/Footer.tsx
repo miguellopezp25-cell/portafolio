@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-muted-foreground text-sm">
           &copy; {new Date().getFullYear()} &mdash; Miguel |{" "}
-          <span className="text-purple-500 font-mono">Backend Dev &amp; Support</span>
+          <span className="text-purple-500 font-mono">Desarrollador Backend &amp; Soporte</span>
         </p>
 
         <div className="flex gap-6 text-sm">

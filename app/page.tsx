@@ -22,12 +22,12 @@ export default function Home() {
 
         <p className="text-xl md:text-2xl text-muted-foreground font-medium">
           Ingeniero en Sistemas &amp;{" "}
-          <span className="text-purple-400">Backend Developer</span>
+          <span className="text-purple-400">Desarrollador Backend</span>
         </p>
 
         <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
           Especializado en sistemas escalables con Go, Python y microservicios.
-          Construyo soluciones robustas desde el backend hasta el deploy.
+          Construyo soluciones robustas desde el backend hasta el despliegue.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 pt-4">

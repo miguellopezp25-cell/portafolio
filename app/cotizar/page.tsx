@@ -227,6 +227,7 @@ export default function CotizarPage() {
         <div className="text-xs text-muted-foreground space-y-1 border border-border rounded-lg px-4 py-3 bg-card">
           <p>* El precio de <strong>Dominio</strong> y <strong>Servidor</strong> es por 1 año.</p>
           <p>* El precio de <strong>Mantenimiento/Soporte</strong> es por 2 meses.</p>
+          <p>* Servicio de cotización creado con <strong>Python / FastAPI</strong>.</p>
         </div>
 
         <Button
