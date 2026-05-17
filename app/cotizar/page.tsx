@@ -5,7 +5,7 @@ import { fetchQuote } from "@/lib/api"
 import type { ProjectType, APIType } from "@/lib/api"
 import { Calculator, Check, X, Loader2, DollarSign } from "lucide-react"
 
-type BoolKey = "interactive" | "admin" | "payments" | "with_domain" | "with_server" | "seo" | "copywriting" | "responsive_premium" | "maintenance" | "deployment"
+type BoolKey = "interactive" | "panel_admin" | "payments" | "with_domain" | "with_server" | "seo" | "copywriting" | "responsive_premium" | "maintenance" | "deployment"
 
 const projectTypes: { value: ProjectType; label: string; desc: string; price: number; includedPages: number }[] = [
   { value: "Visual Basic", label: "Visual Basic", desc: "Sitio sencillo, pocas páginas", price: 5000, includedPages: 3 },
@@ -25,7 +25,7 @@ const apiOptions: { value: APIType; label: string; price: number }[] = [
 const toggles: { key: BoolKey; label: string; group: string; price: number }[] = [
   // Funcionalidad
   { key: "interactive", label: "Interactividad", group: "Funcionalidad", price: 1500 },
-  { key: "admin", label: "Admin", group: "Funcionalidad", price: 15000 },
+  { key: "panel_admin", label: "Panel Administrativo", group: "Funcionalidad", price: 15000 },
   { key: "payments", label: "Pagos", group: "Funcionalidad", price: 5000 },
   // Contenido y Marketing
   { key: "seo", label: "SEO", group: "Marketing", price: 2000 },
@@ -42,7 +42,7 @@ const breakdownLabels: Record<string, string> = {
   type_of_project: "Tipo de proyecto",
   pages_or_modules: "Páginas / Módulos",
   interactive: "Interactividad",
-  admin: "Admin",
+  panel_admin: "Panel Administrativo",
   payments: "Pagos",
   with_domain: "Dominio",
   with_server: "Servidor",
@@ -61,7 +61,7 @@ export default function CotizarPage() {
     type_of_project: "Visual Basic" as ProjectType,
     pages_or_modules: 0,
     interactive: false,
-    admin: false,
+    panel_admin: false,
     payments: false,
     with_domain: false,
     with_server: false,

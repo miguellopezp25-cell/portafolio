@@ -7,7 +7,7 @@ export interface QuoteRequestPayload {
   type_of_project: ProjectType
   pages_or_modules: number
   interactive: boolean
-  admin: boolean
+  panel_admin: boolean
   payments: boolean
   with_domain: boolean
   with_server: boolean
