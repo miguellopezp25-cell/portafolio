@@ -6,19 +6,19 @@ const projects = [
   {
     title: "Appointmetly - Gestión de Citas empresariales y negocios",
     desc: "Backend modular en Go/Python. +30 APIs REST con 95% de test coverage y despliegue en AWS (EC2/S3).",
-    tags: ["Go", "Python", "PostgreSQL", "Docker", "Kubernetes", "AWS"],
+    tags: ["Privado", "Go", "Python", "PostgreSQL", "Docker", "Kubernetes", "AWS"],
     colors: ["rgb(147,51,234)", "rgb(0,255,255)"],
   },
   {
     title: "Migración Java a Microservicios",
     desc: "Transición de monolito Java a microservicios Node.js. Seguridad con middlewares y optimización de Onboarding.",
-    tags: ["Java", "Node.js", "Express", "Postman"],
+    tags: ["Privado", "Java", "Node.js", "Express", "Postman"],
     colors: ["rgb(0,255,100)", "rgb(0,100,255)"],
   },
   {
     title: "Sistema Control Educativo",
     desc: "Arquitectura por capas en Go y React. Optimización de queries PostgreSQL mejorando carga en 20%.",
-    tags: ["Go", "React", "PostgreSQL", "Docker"],
+    tags: ["Privado", "Go", "React", "PostgreSQL", "Docker"],
     colors: ["rgb(255,100,0)", "rgb(255,0,200)"],
   },
   {
