@@ -15,7 +15,6 @@ export interface QuoteRequestPayload {
   copywriting: boolean
   responsive_premium: boolean
   maintenance: boolean
-  deployment: boolean
   apis: APIType[]
 }
 
@@ -24,6 +23,19 @@ export interface QuoteResponse {
   estimated_cost: number
   currency: string
   notes?: Record<string, string>
+  includes: {
+    type_of_project: string
+    panel_admin: string | null
+    payments: string | null
+    interactive: string | null
+    seo: string | null
+    copywriting: string | null
+    responsive_premium: string | null
+    with_domain: string | null
+    with_server: string | null
+  maintenance: string | null
+  apis: { name: string; price: number; description: string }[]
+  }
 }
 
 export async function fetchQuote(data: QuoteRequestPayload) {
