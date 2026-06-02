@@ -16,8 +16,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Miguel.dev",
-  description: "Portafolio de Miguel - Desarrollador con Soporte",
+  title: "Miguel Angel Lopez | Ingeniero de Software Backend",
+  description:
+    "Ingeniero de Software Backend especializado en Golang, Python, APIs REST, microservicios y cloud (AWS). Portafolio profesional con experiencia en Appointmetly, Global Gas y proyectos freelance.",
+  openGraph: {
+    title: "Miguel Angel Lopez | Ingeniero de Software Backend",
+    description:
+      "Ingeniero de Software Backend especializado en Golang, Python, APIs REST, microservicios y cloud (AWS).",
+    url: "https://mlopezdev.netlify.app/",
+    siteName: "Miguel Angel Lopez",
+    locale: "es_MX",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -39,8 +53,8 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <div className="fixed top-[-10%] left-[-10%] size-w-[40%] h-[40%] rounded-full bg-purple-900/20 blur-[120px] -z-10" />
-          <div className="fixed bottom-[-10%] right-[-10%] size-w-[30%] h-[30%] rounded-full bg-blue-900/10 blur-[120px] -z-10" />
+          <div className="fixed top-[-10%] left-[-10%] w-[40%] aspect-square rounded-full bg-purple-900/20 blur-[120px] -z-10" />
+          <div className="fixed bottom-[-10%] right-[-10%] w-[30%] aspect-square rounded-full bg-blue-900/10 blur-[120px] -z-10" />
         </ThemeProvider>
       </body>
     </html>

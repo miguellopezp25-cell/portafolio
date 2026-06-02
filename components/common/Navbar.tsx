@@ -31,13 +31,18 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-all duration-300 ${
+                className={`group relative text-sm font-medium transition-colors duration-300 ${
                   pathname === link.href
-                    ? "text-purple-500 shadow-[0_15px_15px_-10px_rgba(168,85,247,0.4)]"
+                    ? "text-purple-500"
                     : "text-muted-foreground hover:text-purple-400"
                 }`}
               >
                 {link.name}
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-purple-500 transition-all duration-300 ${
+                    pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
               </Link>
             ))}
           </div>

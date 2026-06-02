@@ -1,51 +1,69 @@
 "use client";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { useInView } from "@/lib/use-in-view";
 
 const projects = [
   {
     title: "Appointmetly - Gestión de Citas empresariales y negocios",
-    desc: "Backend modular en Go/Python. +30 APIs REST con 95% de cobertura de pruebas y despliegue en AWS (EC2/S3).",
+    desc: "Lideré el diseño y desarrollo de +30 APIs REST con arquitectura modular en Go/Python. Optimización de consultas SQL y JSONB, cobertura de pruebas superior al 95% con Testify/SQLMock. Monitoreo con Prometheus y Loki.",
     tags: ["Privado", "Go", "Python", "PostgreSQL", "Docker", "Kubernetes", "AWS"],
     colors: ["rgb(147,51,234)", "rgb(0,255,255)"],
   },
   {
-    title: "Migración Java a Microservicios",
-    desc: "Transición de monolito Java a microservicios Node.js. Seguridad con middlewares y optimización de incorporación.",
+    title: "Migración Java a Microservicios — Global Gas",
+    desc: "Migración de monolito Java a microservicios Node.js con middlewares de autenticación y manejo de errores. Documentación técnica y onboarding con Postman.",
     tags: ["Privado", "Java", "Node.js", "Express", "Postman"],
     colors: ["rgb(0,255,100)", "rgb(0,100,255)"],
   },
   {
     title: "Sistema Control Educativo",
-    desc: "Arquitectura por capas en Go y React. Optimización de consultas PostgreSQL mejorando carga en 20%.",
+    desc: "Arquitectura escalable por capas (handlers, services, repositories) en Go y React. Optimización de consultas PostgreSQL mejorando carga en 20%. Despliegue con Docker.",
     tags: ["Privado", "Go", "React", "PostgreSQL", "Docker"],
     colors: ["rgb(255,100,0)", "rgb(255,0,200)"],
   },
   {
     title: "Estudio de Tatuajes - Reservas",
-    desc: "Plataforma frontend para la gestión de reservas y portafolio. Interfaz responsiva y gestión de certificados SSL/Dominios.",
+    desc: "Frontend para gestión de reservas y portafolio con Next.js. Interfaz responsiva, configuración de hosting, certificados SSL y dominios.",
     tags: ["TypeScript", "Next.js", "React"],
     image: "/projects/tatuajes-1.png",
   },
   {
     title: "Módulo de Administración y Galería",
-    desc: "Módulo administrativo para gestión de contenido dinámico y flujo de trabajo en Git/GitHub.",
+    desc: "Frontend administrativo para gestión de contenido dinámico con Next.js y React. Flujo de trabajo en Git/GitHub.",
     tags: ["TypeScript", "Next.js", "React"],
     image: "/projects/tatuajes-2.png",
   },
   {
     title: "Sistema de Gestión Médica",
-    desc: "Sistema de gestión para consultorios. Optimización de experiencia de usuario y despliegue escalable en hosting.",
+    desc: "Frontend para gestión de consultorios médicos con Next.js y React. Interfaz optimizada para la experiencia de usuario y despliegue en hosting.",
     tags: ["TypeScript", "Next.js", "React"],
     image: "/projects/consultorio-medico.png",
   },
   {
     title: "Restaurante - Menú Digital",
-    desc: "Menú interactivo orientado a rendimiento. Integración de frontend moderno con arquitectura robusta.",
-    tags: ["React", "Node.js", "TypeScript"],
+    desc: "Menú digital interactivo con React y TypeScript. Interfaz moderna orientada a rendimiento y experiencia de usuario.",
+    tags: ["React", "TypeScript", "Next.js"],
     image: "/projects/restaurant.png",
   },
 ];
+
+function FadeInCard({ children, delay }: { children: React.ReactNode; delay: number }) {
+  const { ref, inView } = useInView(0.1);
+  return (
+    <div
+      ref={ref}
+      className="transition-all duration-700 ease-out"
+      style={{
+        opacity: inView ? 1 : 0,
+        translate: inView ? "0 0" : "0 40px",
+        transitionDelay: `${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function PortfolioPage() {
   return (
@@ -70,8 +88,8 @@ export default function PortfolioPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, i) => (
+          <FadeInCard key={i} delay={i * 100}>
           <div
-            key={i}
             className="group relative block rounded-xl overflow-hidden border border-border bg-card transition-all duration-300 hover:border-purple-500/50 hover:shadow-[0_0_25px_-8px_rgba(168,85,247,0.4)]"
           >
             <div className="relative overflow-hidden aspect-video">
@@ -110,6 +128,7 @@ export default function PortfolioPage() {
               </div>
             </div>
           </div>
+          </FadeInCard>
         ))}
       </div>
     </section>
