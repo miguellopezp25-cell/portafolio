@@ -136,4 +136,21 @@
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  body > .skiptranslate {
+    display: none !important;
+  }
+  .goog-te-banner-frame {
+    display: none !important;
+  }
+  .goog-te-gadget-simple {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 4px;
+  }
+  .goog-te-gadget-simple .goog-te-menu-value {
+    text-decoration: none !important;
+  }
+  .VIpgJd-ZVi9ic-azH-yNaJac {
+    display: none;
+  }
 }
