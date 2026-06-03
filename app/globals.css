@@ -136,4 +136,19 @@
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  .goog-te-banner-frame { display: none !important; }
+  .goog-te-gadget-simple {
+    font-size: 13px !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 2px 4px !important;
+  }
+  .goog-te-gadget-simple .goog-te-menu-value {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+  .goog-te-gadget-simple .goog-te-menu-value:hover {
+    color: #a855f7 !important;
+  }
+  .goog-te-gadget-simple img { display: none !important; }
+  .goog-te-gadget-icon { display: none !important; }
 }
