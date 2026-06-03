@@ -49,6 +49,9 @@ function styleWidget() {
       text.style.setProperty("text-decoration", "none", "important");
       text.style.setProperty("font-size", "13px", "important");
       text.style.setProperty("font-weight", "500", "important");
+      if (text.textContent === "Select Language" || text.textContent === "Seleccionar idioma") {
+        text.textContent = "🌐 Idioma";
+      }
     }
 
     simple.querySelectorAll("img").forEach((img) => img.remove());
