@@ -11,6 +11,7 @@ const links = [
   { name: "Servicios", href: "/my-services" },
   { name: "Portafolio", href: "/portfolio" },
   { name: "Cotizar", href: "/cotizar" },
+  { name: "Juegos", href: "/juegos" },
   { name: "Contacto", href: "/contacto" },
 ];
 

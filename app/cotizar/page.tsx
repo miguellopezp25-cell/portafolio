@@ -1,382 +1,339 @@
 "use client"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { fetchQuote } from "@/lib/api"
-import type { ProjectType, APIType } from "@/lib/api"
-import { Calculator, Check, X, Loader2, DollarSign } from "lucide-react"
+import { Check, X, Calculator, DollarSign, Info } from "lucide-react"
 
-type BoolKey = "interactive" | "panel_admin" | "payments" | "with_domain" | "with_server" | "seo" | "copywriting" | "responsive_premium" | "maintenance"
+type ProjectType = "landing" | "institucional" | "blog" | "ecommerce" | "saas" | "dashboard"
+type AddonKey =
+  | "panel_admin" | "auth" | "payments" | "newsletter"
+  | "multilenguaje" | "blog_integrado" | "diseno_personalizado"
+  | "animaciones" | "copywriting" | "seo_avanzado"
+  | "dominio" | "hosting_basico" | "hosting_premium" | "ssl" | "email_profesional"
+  | "mantenimiento_basico" | "mantenimiento_premium"
+  | "analytics" | "api_rest"
 
-const projectTypes: { value: ProjectType; label: string; desc: string; price: number; includedPages: number; servers: number }[] = [
-  { value: "Visual Basic", label: "Visual Basic", desc: "Landing page personalizada", price: 6000, includedPages: 3, servers: 1 },
-  { value: "Visual Professional", label: "Visual Professional", desc: "Sitio profesional con CMS", price: 15000, includedPages: 6, servers: 1 },
-  { value: "Ecommerce", label: "Ecommerce", desc: "Tienda en línea con carrito y pagos", price: 40000, includedPages: 10, servers: 3 },
-  { value: "Dashboard", label: "Dashboard", desc: "Panel administrativo con backend completo", price: 50000, includedPages: 8, servers: 3 },
-]
-
-const apiOptions: { value: APIType; label: string; price: number }[] = [
-  { value: "OpenAI", label: "OpenAI", price: 6000 },
-  { value: "WhatsApp", label: "WhatsApp", price: 5000 },
-  { value: "Telegram", label: "Telegram", price: 2000 },
-  { value: "Google Maps", label: "Google Maps", price: 2000 },
-  { value: "Stripe", label: "Stripe", price: 8000 },
-]
-
-const toggles: { key: BoolKey; label: string; group: string; price: number | ((type: ProjectType) => number) }[] = [
-  // Funcionalidad
-  { key: "interactive", label: "Interactividad", group: "Funcionalidad", price: 2000 },
-  { key: "panel_admin", label: "Panel Administrativo", group: "Funcionalidad", price: 25000 },
-  { key: "payments", label: "Pagos", group: "Funcionalidad", price: 10000 },
-  // Contenido y Marketing
-  { key: "seo", label: "SEO", group: "Marketing", price: 2000 },
-  { key: "copywriting", label: "Copywriting", group: "Marketing", price: 1500 },
-  { key: "responsive_premium", label: "Responsive Premium", group: "Diseño", price: 2000 },
-  // Infraestructura
-  { key: "with_domain", label: "Dominio", group: "Infraestructura", price: 500 },
-  { key: "with_server", label: "Servidor", group: "Infraestructura", price: (type: ProjectType) => {
-    const pt = projectTypes.find(p => p.value === type)
-    return (pt?.servers ?? 1) * 2000
-  }},
-  { key: "maintenance", label: "Mantenimiento", group: "Infraestructura", price: 2000 },
-]
-
-const breakdownLabels: Record<string, string> = {
-  type_of_project: "Tipo de proyecto",
-  pages_or_modules: "Páginas / Módulos",
-  interactive: "Interactividad",
-  panel_admin: "Panel Administrativo",
-  payments: "Pagos",
-  with_domain: "Dominio",
-  with_server: "Servidor",
-  seo: "SEO",
-  copywriting: "Copywriting",
-  responsive_premium: "Responsive Premium",
-  maintenance: "Mantenimiento",
-  apis: "APIs",
-  backend_complexity: "Complejidad Backend",
+interface Addon {
+  key: AddonKey
+  label: string
+  desc: string
+  group: "funcionalidad" | "diseno_contenido" | "infraestructura" | "postlanzamiento"
+  price: number
+  recurring: boolean
 }
 
-const toggleGroups = [...new Set(toggles.map((t) => t.group))]
+const projectTypes: {
+  value: ProjectType
+  label: string
+  desc: string
+  ideal: string
+  pages: number
+  price: number
+  features: string[]
+}[] = [
+  {
+    value: "landing",
+    label: "Landing Page",
+    desc: "Página única para campañas o lanzamientos",
+    ideal: "Emprendedores, productos digitales, eventos",
+    pages: 1,
+    price: 3500,
+    features: [
+      "1 página con diseño responsivo",
+      "Formulario de contacto",
+      "Optimización de velocidad básica",
+    ],
+  },
+  {
+    value: "institucional",
+    label: "Sitio Institucional",
+    desc: "Presencia web profesional con varias secciones",
+    ideal: "Negocios locales, restaurantes, consultorios",
+    pages: 5,
+    price: 8500,
+    features: [
+      "Hasta 5 páginas",
+      "Galería de imágenes / portafolio",
+      "Formulario de contacto avanzado",
+      "Mapa interactivo (Google Maps)",
+    ],
+  },
+  {
+    value: "blog",
+    label: "Blog / Magazine",
+    desc: "Plataforma de contenido con CMS",
+    ideal: "Creadores de contenido, medios, educadores",
+    pages: 6,
+    price: 12000,
+    features: [
+      "CMS headless o WordPress headless",
+      "Categorías, etiquetas y búsqueda",
+      "Editor rich-text con imágenes",
+      "Comentarios moderados",
+    ],
+  },
+  {
+    value: "ecommerce",
+    label: "E-commerce",
+    desc: "Tienda en línea completa con carrito y pagos",
+    ideal: "Tiendas físicas, marcas, dropshipping",
+    pages: 10,
+    price: 35000,
+    features: [
+      "Catálogo de productos ilimitado",
+      "Carrito de compras con Ajax",
+      "Pasarela de pago (Stripe / PayPal)",
+      "Panel de administración de pedidos",
+      "Notificaciones por correo",
+    ],
+  },
+  {
+    value: "saas",
+    label: "SaaS / Web App",
+    desc: "Aplicación web con suscripciones y dashboard",
+    ideal: "Startups, herramientas digitales, plataformas",
+    pages: 8,
+    price: 65000,
+    features: [
+      "Autenticación de usuarios (registro/login)",
+      "Panel de usuario con métricas",
+      "Sistema de suscripciones (Stripe)",
+      "Base de datos PostgreSQL",
+      "API RESTful documentada",
+    ],
+  },
+  {
+    value: "dashboard",
+    label: "Dashboard Administrativo",
+    desc: "Panel interno con reportes y gestión de datos",
+    ideal: "Empresas, equipos internos, logística",
+    pages: 6,
+    price: 55000,
+    features: [
+      "Autenticación con roles (admin/editor/viewer)",
+      "Tablero con gráficas y reportes",
+      "CRUD completo de entidades",
+      "Exportación a CSV/PDF",
+      "Base de datos PostgreSQL",
+    ],
+  },
+]
+
+const addons: Addon[] = [
+  // Funcionalidad
+  { key: "panel_admin", label: "Panel Administrativo", desc: "CMS para gestionar contenido sin código", group: "funcionalidad", price: 18000, recurring: false },
+  { key: "auth", label: "Autenticación de Usuarios", desc: "Registro, login, recuperación de contraseña y 2FA", group: "funcionalidad", price: 8000, recurring: false },
+  { key: "payments", label: "Pasarela de Pago", desc: "Stripe, PayPal o Mercado Pago para cobrar", group: "funcionalidad", price: 10000, recurring: false },
+  { key: "newsletter", label: "Newsletter / Email Marketing", desc: "Suscripción por correo y envío de campañas", group: "funcionalidad", price: 5000, recurring: false },
+  { key: "multilenguaje", label: "Multilenguaje (i18n)", desc: "Soporte para 2+ idiomas con selector", group: "funcionalidad", price: 6000, recurring: false },
+  { key: "blog_integrado", label: "Blog Integrado", desc: "Sección de blog con CMS y editor rich-text", group: "funcionalidad", price: 8000, recurring: false },
+  { key: "api_rest", label: "API REST Personalizada", desc: "Endpoints documentados para integraciones externas", group: "funcionalidad", price: 12000, recurring: false },
+  // Diseño y Contenido
+  { key: "diseno_personalizado", label: "Diseño UI/UX Personalizado", desc: "Diseño desde cero en Figma, no plantilla", group: "diseno_contenido", price: 8000, recurring: false },
+  { key: "animaciones", label: "Animaciones y Transiciones", desc: "Microinteracciones, scroll animado, parallax", group: "diseno_contenido", price: 4000, recurring: false },
+  { key: "copywriting", label: "Copywriting Profesional", desc: "Redacción de textos persuasivos y SEO", group: "diseno_contenido", price: 3000, recurring: false },
+  { key: "seo_avanzado", label: "SEO Avanzado", desc: "Auditoría técnica, schema markup, sitemap, métricas", group: "diseno_contenido", price: 5000, recurring: false },
+  // Infraestructura
+  { key: "dominio", label: "Dominio .com (.mx .net)", desc: "Registro por 1 año con configuración DNS", group: "infraestructura", price: 400, recurring: true },
+  { key: "hosting_basico", label: "Hosting Básico", desc: "Hosting compartido, 10GB SSD, 1 sitio web", group: "infraestructura", price: 2000, recurring: true },
+  { key: "hosting_premium", label: "Hosting Premium", desc: "VPS optimizado, CDN, backups semanales, SSL", group: "infraestructura", price: 4000, recurring: true },
+  { key: "ssl", label: "Certificado SSL", desc: "HTTPS con Let's Encrypt o SSL comercial", group: "infraestructura", price: 0, recurring: false },
+  { key: "email_profesional", label: "Correo Profesional", desc: "2 cuentas de correo con tu dominio", group: "infraestructura", price: 1200, recurring: true },
+  // Post-lanzamiento
+  { key: "analytics", label: "Analytics y Tracking", desc: "Google Analytics 4, eventos personalizados, dashboard", group: "postlanzamiento", price: 2500, recurring: false },
+  { key: "mantenimiento_basico", label: "Mantenimiento Básico (3 meses)", desc: "Actualizaciones de seguridad, backups, uptime monitoring", group: "postlanzamiento", price: 3500, recurring: false },
+  { key: "mantenimiento_premium", label: "Mantenimiento Premium (6 meses)", desc: "Todo lo básico + contenido nuevo, soporte prioritario 24/7", group: "postlanzamiento", price: 8000, recurring: false },
+]
+
+const addonGroups: { key: string; label: string }[] = [
+  { key: "funcionalidad", label: "Funcionalidad" },
+  { key: "diseno_contenido", label: "Diseño y Contenido" },
+  { key: "infraestructura", label: "Infraestructura" },
+  { key: "postlanzamiento", label: "Post-lanzamiento" },
+]
 
 export default function CotizarPage() {
-  const [form, setForm] = useState({
-    type_of_project: "Visual Basic" as ProjectType,
-    pages_or_modules: 0,
-    interactive: false,
-    panel_admin: false,
-    payments: false,
-    with_domain: false,
-      with_server: false,
-      seo: false,
-      copywriting: false,
-      responsive_premium: false,
-      maintenance: false,
-      apis: [] as APIType[],
-  })
-  const [result, setResult] = useState<{
-    breakdown: Record<string, number>
-    estimated_cost: number
-    currency: string
-    notes?: Record<string, string>
-    includes?: {
-      type_of_project: string
-      panel_admin: string | null
-      payments: string | null
-      interactive: string | null
-      seo: string | null
-      copywriting: string | null
-      responsive_premium: string | null
-      with_domain: string | null
-      with_server: string | null
-      maintenance: string | null
-      apis: { name: string; price: number; description: string }[]
-    }
-  } | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
+  const [projectType, setProjectType] = useState<ProjectType | null>(null)
+  const [extraPages, setExtraPages] = useState(0)
+  const [selectedAddons, setSelectedAddons] = useState<Set<AddonKey>>(new Set())
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
-    setResult(null)
-    try {
-      const data = await fetchQuote(form)
-      setResult(data)
-    } catch {
-      setError("Error al calcular cotización. Verifica que el servidor esté corriendo.")
-    } finally {
-      setLoading(false)
-    }
+  function toggleAddon(key: AddonKey) {
+    setSelectedAddons((prev) => {
+      const next = new Set(prev)
+      if (next.has(key)) next.delete(key)
+      else next.add(key)
+      return next
+    })
   }
 
-  function toggleBool(key: BoolKey) {
-    setForm((prev) => ({ ...prev, [key]: !prev[key] }))
-  }
+  const project = projectTypes.find((p) => p.value === projectType)
 
-  function toggleApi(api: APIType) {
-    setForm((prev) => ({
-      ...prev,
-      apis: prev.apis.includes(api)
-        ? prev.apis.filter((a) => a !== api)
-        : [...prev.apis, api],
-    }))
-  }
+  const addonTotal = addons.reduce((sum, a) => {
+    if (selectedAddons.has(a.key)) return sum + a.price
+    return sum
+  }, 0)
+
+  const extraPagesTotal = project ? Math.max(0, extraPages) * 500 : 0
+
+  const total = project
+    ? project.price + addonTotal + extraPagesTotal
+    : 0
 
   return (
-    <section className="max-w-4xl mx-auto px-6 py-20 space-y-8">
+    <section className="max-w-4xl mx-auto px-6 py-20 space-y-10">
       <div className="space-y-2">
-        <h1 className="text-4xl font-semibold text-foreground">Cotizador</h1>
+        <h1 className="text-4xl font-semibold text-foreground">Cotizador Web</h1>
         <p className="text-muted-foreground">
-          Calcula el costo estimado de tu proyecto web.
+          Selecciona el tipo de proyecto y los servicios adicionales para obtener un presupuesto detallado.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Tipo de proyecto */}
-        <div className="space-y-3">
-          <label className="text-sm font-medium text-foreground">Tipo de proyecto</label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {projectTypes.map((pt) => (
+      {/* Tipo de proyecto */}
+      <div className="space-y-4">
+        <h2 className="text-sm font-medium text-foreground">1. Elige el tipo de proyecto</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {projectTypes.map((pt) => {
+            const isSelected = projectType === pt.value
+            return (
               <button
                 key={pt.value}
                 type="button"
-                onClick={() => setForm({ ...form, type_of_project: pt.value })}
-                className={`text-left rounded-xl border px-4 py-3 transition-all ${
-                  form.type_of_project === pt.value
-                    ? "border-purple-500/50 bg-purple-500/10 text-purple-400"
-                    : "border-border bg-card text-muted-foreground hover:border-purple-500/30"
+                onClick={() => setProjectType(pt.value)}
+                className={`text-left rounded-xl border-2 px-5 py-4 transition-all ${
+                  isSelected
+                    ? "border-purple-500 bg-purple-500/10 shadow-lg shadow-purple-900/20"
+                    : "border-border bg-card hover:border-purple-500/30 hover:shadow-md"
                 }`}
               >
-                <span className="block text-sm font-medium">{pt.label}</span>
-                <span className="block text-xs text-muted-foreground mt-0.5">{pt.desc}</span>
-                <span className="block text-[11px] text-muted-foreground/70 mt-0.5">{pt.includedPages} páginas incluidas</span>
-                <span className="block text-xs text-purple-400 mt-1 font-medium">$ {pt.price.toLocaleString()}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Páginas */}
-        <div className="space-y-2">
-          <label htmlFor="pages" className="text-sm font-medium text-foreground">
-            Número de páginas / módulos
-          </label>
-          <input
-            id="pages"
-            type="number"
-            min={0}
-            value={form.pages_or_modules}
-            onChange={(e) =>
-              setForm({ ...form, pages_or_modules: Math.max(0, Number(e.target.value)) })
-            }
-            className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
-          />
-          {(() => {
-            const pt = projectTypes.find(p => p.value === form.type_of_project)
-            const included = pt?.includedPages ?? 0
-            const extra = Math.max(0, form.pages_or_modules - included)
-            return (
-              <p className="text-xs text-muted-foreground">
-                {included} incluidas en {pt?.label}.{extra > 0 ? ` ${extra} extra${extra > 1 ? 's' : ''} a $500 c/u.` : ''}
-              </p>
-            )
-          })()}
-        </div>
-
-        {/* Toggles agrupados */}
-        {toggleGroups.map((group) => (
-          <div key={group} className="space-y-3">
-            <p className="text-sm font-medium text-foreground">{group}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {toggles
-                .filter((t) => t.group === group)
-                .map((t) => {
-                  const price = typeof t.price === "function" ? t.price(form.type_of_project) : t.price
-                  return (
-                    <button
-                      key={t.key}
-                      type="button"
-                      onClick={() => toggleBool(t.key)}
-                      className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
-                        form[t.key]
-                          ? "border-purple-500/50 bg-purple-500/10 text-purple-400"
-                          : "border-border bg-card text-muted-foreground hover:border-purple-500/30"
-                      }`}
-                    >
-                      <span className="flex items-center gap-1">
-                        <span>{t.label}</span>
-                        <span className="text-purple-400 text-xs">+${price.toLocaleString()}</span>
-                        {t.key === "with_server" && (
-                          <span className="text-[10px] text-muted-foreground/60 ml-1">
-                            ({projectTypes.find(p => p.value === form.type_of_project)?.servers ?? 1} serv.)
-                          </span>
-                        )}
-                      </span>
-                      {form[t.key] ? <Check size={16} /> : <X size={16} />}
-                    </button>
-                  )
-                })}
-            </div>
-          </div>
-        ))}
-
-        {/* APIs */}
-        <div className="space-y-3">
-          <p className="text-sm font-medium text-foreground">APIs</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {apiOptions.map((api) => (
-              <button
-                key={api.value}
-                type="button"
-                onClick={() => toggleApi(api.value)}
-                className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
-                  form.apis.includes(api.value)
-                    ? "border-purple-500/50 bg-purple-500/10 text-purple-400"
-                    : "border-border bg-card text-muted-foreground hover:border-purple-500/30"
-                }`}
-              >
-                <span className="flex items-center gap-1">
-                  <span>{api.label}</span>
-                  <span className="text-purple-400 text-xs">+${api.price.toLocaleString()}</span>
+                <span className={`block text-base font-semibold ${isSelected ? "text-purple-400" : "text-foreground"}`}>
+                  {pt.label}
                 </span>
-                {form.apis.includes(api.value) ? <Check size={16} /> : <X size={16} />}
+                <span className="block text-xs text-muted-foreground mt-1 leading-relaxed">{pt.desc}</span>
+                <span className="block text-[11px] text-muted-foreground/70 mt-1">{pt.ideal}</span>
+                <ul className="mt-3 space-y-1">
+                  {pt.features.map((f) => (
+                    <li key={f} className="text-[11px] text-muted-foreground/80 flex items-start gap-1">
+                      <Check size={10} className="text-purple-400 mt-0.5 shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <span className="block text-lg font-bold text-purple-400 mt-3">
+                  ${pt.price.toLocaleString()} MX
+                </span>
               </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {project && (
+        <>
+          {/* Páginas extra */}
+          <div className="space-y-2">
+            <h2 className="text-sm font-medium text-foreground">2. Páginas / secciones adicionales</h2>
+            <p className="text-xs text-muted-foreground">
+              {project.pages} páginas incluidas en <strong>{project.label}</strong>. Páginas extra: <strong>$500 MXN</strong> c/u.
+            </p>
+            <input
+              type="number"
+              min={0}
+              value={extraPages}
+              onChange={(e) => setExtraPages(Math.max(0, Number(e.target.value)))}
+              className="w-32 rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
+            />
+          </div>
+
+          {/* Addons */}
+          <div className="space-y-6">
+            <h2 className="text-sm font-medium text-foreground">3. Servicios adicionales</h2>
+            {addonGroups.map((group) => (
+              <div key={group.key} className="space-y-3">
+                <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{group.label}</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {addons
+                    .filter((a) => a.group === group.key)
+                    .map((addon) => {
+                      const isSelected = selectedAddons.has(addon.key)
+                      return (
+                        <button
+                          key={addon.key}
+                          type="button"
+                          onClick={() => toggleAddon(addon.key)}
+                          className={`text-left rounded-xl border px-4 py-3 transition-all ${
+                            isSelected
+                              ? "border-purple-500/50 bg-purple-500/10"
+                              : "border-border bg-card hover:border-purple-500/30"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className={`text-sm font-medium ${isSelected ? "text-purple-400" : "text-foreground"}`}>
+                              {addon.label}
+                            </span>
+                            <span className={`text-xs font-medium ${isSelected ? "text-purple-400" : "text-muted-foreground"}`}>
+                              +${addon.price.toLocaleString()}{addon.recurring ? "/año" : ""}
+                            </span>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">{addon.desc}</p>
+                        </button>
+                      )
+                    })}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-
-        <div className="text-xs text-muted-foreground space-y-1 border border-border rounded-lg px-4 py-3 bg-card">
-          <p>* El precio de <strong>Dominio</strong> es por 1 año.</p>
-          <p>* <strong>Servidor</strong>: $2,000/año por servidor (incluye configuración, CI/CD, SSL, DNS). Proyectos grandes (Dashboard, Ecommerce) usan 3 servidores (frontend + backend + base de datos).</p>
-          <p>* El precio de <strong>Mantenimiento/Soporte</strong> es por 2 meses.</p>
-          <p>* Servicio de cotización creado con <strong>Python / FastAPI</strong>.</p>
-        </div>
-
-        <Button
-          type="submit"
-          disabled={loading}
-          className="bg-purple-600 hover:bg-purple-700 text-white gap-2"
-        >
-          {loading ? (
-            <Loader2 size={16} className="animate-spin" />
-          ) : (
-            <Calculator size={16} />
-          )}
-          {loading ? "Calculando..." : "Calcular cotización"}
-        </Button>
-      </form>
-
-      {error && (
-        <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3">
-          {error}
-        </div>
+        </>
       )}
 
-      {result && (
-        <div className="rounded-xl border border-purple-500/30 bg-purple-500/5 p-6 space-y-6">
-          <div className="flex items-center gap-3">
-            <DollarSign size={24} className="text-purple-400" />
-            <span className="text-3xl font-bold text-foreground">
-              {result.estimated_cost.toLocaleString()}{" "}
-              <span className="text-lg font-normal text-muted-foreground">{result.currency}</span>
-            </span>
+      {/* Resumen */}
+      {project && (
+        <div className="rounded-xl border border-purple-500/30 bg-purple-500/5 p-6 space-y-5">
+          <h2 className="text-sm font-semibold text-foreground flex items-center gap-2">
+            <DollarSign size={18} className="text-purple-400" />
+            Resumen de cotización
+          </h2>
+
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">{project.label} ({project.pages} páginas)</span>
+              <span className="text-foreground font-medium">${project.price.toLocaleString()} MXN</span>
+            </div>
+            {extraPages > 0 && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">{extraPages} página(s) extra</span>
+                <span className="text-foreground font-medium">${extraPagesTotal.toLocaleString()} MXN</span>
+              </div>
+            )}
+            {addonTotal > 0 && (
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Servicios adicionales ({selectedAddons.size})</span>
+                <span className="text-foreground font-medium">${addonTotal.toLocaleString()} MXN</span>
+              </div>
+            )}
+            <div className="border-t border-purple-500/20 pt-2 flex justify-between text-base">
+              <span className="font-bold text-foreground">Total estimado</span>
+              <span className="font-bold text-purple-400">${total.toLocaleString()} MXN</span>
+            </div>
           </div>
 
-          {result.breakdown && Object.keys(result.breakdown).length > 0 && (
-            <div className="border-t border-purple-500/20 pt-4 space-y-2">
-              <p className="text-sm font-medium text-muted-foreground">Desglose:</p>
-              {Object.entries(result.breakdown).map(([key, value]) => (
-                <div key={key} className="flex justify-between text-sm py-1">
-                  <span className="text-muted-foreground">
-                    {breakdownLabels[key] ?? key}
-                    {result.notes?.[key] && (
-                      <span className="block text-[11px] text-purple-400/70">{result.notes[key]}</span>
-                    )}
-                  </span>
-                  <span className="text-foreground font-medium">
-                    ${value.toLocaleString()} {result.currency}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="bg-card border border-border rounded-lg p-4 space-y-2 text-xs text-muted-foreground">
+            <p className="flex items-start gap-1.5">
+              <Info size={12} className="text-purple-400 mt-0.5 shrink-0" />
+              Los precios son en pesos mexicanos (MXN) e incluyen impuestos.
+            </p>
+            <p className="flex items-start gap-1.5">
+              <Info size={12} className="text-purple-400 mt-0.5 shrink-0" />
+              El tiempo de entrega estimado es de 2 a 8 semanas dependiendo de la complejidad.
+            </p>
+            <p className="flex items-start gap-1.5">
+              <Info size={12} className="text-purple-400 mt-0.5 shrink-0" />
+              Incluye 2 rondas de revisión y cambios. Revisiones adicionales tienen costo extra.
+            </p>
+          </div>
 
-          {result.includes && (
-            <div className="border-t border-purple-500/20 pt-4 space-y-3">
-              <p className="text-sm font-medium text-muted-foreground">Incluye:</p>
-              <div className="space-y-3 text-sm">
-                <div className="bg-card border border-border rounded-lg p-3">
-                  <p className="text-xs font-medium text-purple-400 mb-1">{result.includes.type_of_project.split(".")[0]}</p>
-                  <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.type_of_project}</p>
-                </div>
-                {result.includes.panel_admin && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Panel Administrativo</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.panel_admin}</p>
-                  </div>
-                )}
-                {result.includes.payments && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Pagos</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.payments}</p>
-                  </div>
-                )}
-                {result.includes.interactive && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Interactividad</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.interactive}</p>
-                  </div>
-                )}
-                {result.includes.seo && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">SEO</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.seo}</p>
-                  </div>
-                )}
-                {result.includes.copywriting && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Copywriting</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.copywriting}</p>
-                  </div>
-                )}
-                {result.includes.responsive_premium && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Responsive Premium</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.responsive_premium}</p>
-                  </div>
-                )}
-                {result.includes.with_domain && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Dominio</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.with_domain}</p>
-                  </div>
-                )}
-                {result.includes.with_server && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Servidor</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.with_server}</p>
-                  </div>
-                )}
-                {result.includes.maintenance && (
-                  <div className="bg-card border border-border rounded-lg p-3">
-                    <p className="text-xs font-medium text-purple-400 mb-1">Mantenimiento</p>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{result.includes.maintenance}</p>
-                  </div>
-                )}
-                {result.includes.apis.length > 0 && (
-                  <div className="space-y-2">
-                    {result.includes.apis.map((api) => (
-                      <div key={api.name} className="bg-card border border-border rounded-lg p-3">
-                        <p className="text-xs font-medium text-purple-400 mb-1">{api.name} — ${api.price.toLocaleString()}</p>
-                        <p className="text-muted-foreground text-xs leading-relaxed">{api.description}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+          <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white gap-2">
+            <Calculator size={16} />
+            Solicitar cotización formal
+          </Button>
         </div>
       )}
     </section>
