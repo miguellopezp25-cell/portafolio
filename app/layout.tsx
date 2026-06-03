@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,6 +57,16 @@ export default function RootLayout({
           <div className="fixed top-[-10%] left-[-10%] w-[40%] aspect-square rounded-full bg-purple-900/20 blur-[120px] -z-10" />
           <div className="fixed bottom-[-10%] right-[-10%] w-[30%] aspect-square rounded-full bg-blue-900/10 blur-[120px] -z-10" />
         </ThemeProvider>
+        <Script id="gt-init" strategy="beforeInteractive">
+          {`function googleTranslateElementInit(){
+            new google.translate.TranslateElement({
+              pageLanguage:"es",
+              includedLanguages:"es,en,fr,de,pt,it,ja,ko,zh-CN",
+              layout:google.translate.TranslateElement.InlineLayout.SIMPLE,
+              autoDisplay:false
+            },"google_translate_element");
+          }`}
+        </Script>
       </body>
     </html>
   );
