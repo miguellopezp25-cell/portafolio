@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/theme/ThemeToggle";
-import GoogleTranslate from "@/components/common/GoogleTranslate";
 
 const links = [
   { name: "Inicio", href: "/" },
@@ -58,7 +57,6 @@ export default function Navbar() {
           </button>
 
           <ThemeToggle />
-          <GoogleTranslate />
         </div>
       </div>
 
