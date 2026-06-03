@@ -1,27 +1,7 @@
 "use client";
-import { useEffect, useRef } from "react";
 import Script from "next/script";
 
 export default function GoogleTranslate() {
-  const done = useRef(false);
-
-  useEffect(() => {
-    if (done.current) return;
-    done.current = true;
-
-    const interval = setInterval(() => {
-      const el = document.getElementById("google_translate_element");
-      if (el && el.childNodes.length > 0) {
-        el.childNodes[0].childNodes[0].childNodes[0]?.addEventListener("click", (e) => {
-          e.stopPropagation();
-        });
-        clearInterval(interval);
-      }
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <Script id="gt-init" strategy="beforeInteractive">
