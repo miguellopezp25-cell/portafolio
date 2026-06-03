@@ -1,38 +1,71 @@
 "use client";
-import { useEffect } from "react";
-import { Languages } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Languages, ChevronDown, Check } from "lucide-react";
+
+const languages = [
+  { code: "es", label: "Español" },
+  { code: "en", label: "English" },
+  { code: "fr", label: "Français" },
+  { code: "de", label: "Deutsch" },
+  { code: "pt", label: "Português" },
+  { code: "it", label: "Italiano" },
+  { code: "ja", label: "日本語" },
+];
 
 export default function GoogleTranslate() {
+  const [open, setOpen] = useState(false);
+  const [current, setCurrent] = useState("es");
+  const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const addScript = () => {
-      if (document.getElementById("gt_script")) return;
-      const script = document.createElement("script");
-      script.id = "gt_script";
-      script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
-      document.body.appendChild(script);
-    };
-
-    (window as any).googleTranslateElementInit = () => {
-      new (window as any).google.translate.TranslateElement(
-        {
-          pageLanguage: "es",
-          includedLanguages: "es,en,fr,de,it,pt,ja,ko,zh-CN",
-          layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false,
-        },
-        "google_translate_element"
-      );
-    };
-
-    if (!document.getElementById("gt_script")) {
-      addScript();
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  const siteUrl = typeof window !== "undefined"
+    ? window.location.href
+    : "https://mlopezdev.netlify.app";
+
+  function handleSelect(code: string) {
+    setCurrent(code);
+    setOpen(false);
+    if (code === "es") {
+      window.location.href = siteUrl;
+    } else {
+      window.location.href =
+        `https://translate.google.com/translate?sl=es&tl=${code}&u=${encodeURIComponent(siteUrl)}`;
+    }
+  }
+
+  const selected = languages.find((l) => l.code === current);
+
   return (
-    <div className="flex items-center">
-      <div id="google_translate_element" className="[&_.goog-te-gadget-simple]:!bg-transparent [&_.goog-te-gadget-simple]:!border-none [&_.goog-te-gadget-simple]:!text-sm [&_.goog-te-gadget-simple]:!text-muted-foreground [&_.goog-te-gadget-simple]:!p-0 [&_.goog-te-gadget-simple_img]:!hidden [&_.goog-te-gadget-simple_.goog-te-menu-value]:!text-muted-foreground [&_.goog-te-gadget-simple_.goog-te-menu-value:hover]:!text-purple-400" />
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-1 text-muted-foreground hover:text-purple-400 transition-colors text-sm"
+      >
+        <Languages size={16} />
+        <span className="hidden sm:inline">{selected?.label}</span>
+        <ChevronDown size={12} />
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full mt-2 w-36 bg-card border border-border rounded-lg shadow-xl z-50 py-1">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => handleSelect(lang.code)}
+              className="w-full text-left px-3 py-2 text-sm text-muted-foreground hover:text-purple-400 hover:bg-purple-500/5 flex items-center justify-between"
+            >
+              {lang.label}
+              {current === lang.code && <Check size={14} className="text-purple-400" />}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
