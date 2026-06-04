@@ -24,7 +24,6 @@ export const metadata: Metadata = {
     title: "Miguel Angel Lopez | Ingeniero de Software Backend",
     description:
       "Ingeniero de Software Backend especializado en Golang, Python, APIs REST, microservicios y cloud (AWS).",
-    url: "https://mlopezdev.netlify.app/",
     siteName: "Miguel Angel Lopez",
     locale: "es_MX",
     type: "website",
