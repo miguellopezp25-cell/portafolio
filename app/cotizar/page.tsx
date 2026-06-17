@@ -144,6 +144,8 @@ const addons: Addon[] = [
   { key: "mantenimiento_premium", label: "Mantenimiento Premium (6 meses)", desc: "Todo lo básico + contenido nuevo, soporte prioritario 24/7", group: "postlanzamiento", price: 8000, recurring: false },
 ]
 
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "523328359296"
+
 const addonGroups: { key: string; label: string }[] = [
   { key: "funcionalidad", label: "Funcionalidad" },
   { key: "diseno_contenido", label: "Diseño y Contenido" },
@@ -330,7 +332,26 @@ export default function CotizarPage() {
             </p>
           </div>
 
-          <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white gap-2">
+          <Button
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white gap-2"
+            onClick={() => {
+              const project = projectTypes.find((p) => p.value === projectType)
+              if (!project) return
+              const addonList = addons
+                .filter((a) => selectedAddons.has(a.key))
+                .map((a) => `• ${a.label}: +$${a.price.toLocaleString()} MXN`)
+                .join("\n")
+              const text = `*Solicitud de Cotización - Portafolio*
+
+*Tipo de Proyecto:* ${project.label}
+*Precio Base:* $${project.price.toLocaleString()} MXN
+*Páginas Extra:* ${extraPages} ($${extraPagesTotal.toLocaleString()} MXN)
+${addonList ? `*Servicios Adicionales:*\n${addonList}` : ""}
+*Total Estimado:* $${total.toLocaleString()} MXN`
+              const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
+              window.open(url, "_blank")
+            }}
+          >
             <Calculator size={16} />
             Solicitar cotización formal
           </Button>

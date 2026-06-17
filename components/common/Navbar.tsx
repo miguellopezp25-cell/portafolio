@@ -4,21 +4,22 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/theme/ThemeToggle";
-import GoogleTranslate from "@/components/common/GoogleTranslate";
-
-const links = [
-  { name: "Inicio", href: "/" },
-  { name: "Sobre Mí", href: "/about" },
-  { name: "Servicios", href: "/my-services" },
-  { name: "Portafolio", href: "/portfolio" },
-  { name: "Cotizar", href: "/cotizar" },
-  { name: "Juegos", href: "/juegos" },
-  { name: "Contacto", href: "/contacto" },
-];
+import LanguageToggle from "@/components/common/LanguageToggle";
+import { useLanguage } from "@/components/common/LanguageProvider";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const links = [
+    { name: t.nav.home, href: "/" },
+    { name: t.nav.about, href: "/about" },
+    { name: t.nav.services, href: "/my-services" },
+    { name: t.nav.portfolio, href: "/portfolio" },
+    { name: t.nav.quote, href: "/cotizar" },
+    { name: t.nav.contact, href: "/contacto" },
+  ];
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border transition-colors duration-300">
@@ -58,7 +59,7 @@ export default function Navbar() {
           </button>
 
           <ThemeToggle />
-          <GoogleTranslate />
+          <LanguageToggle />
         </div>
       </div>
 

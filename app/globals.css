@@ -135,7 +135,5 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
-    top: 0px !important;
   }
-  .goog-te-banner-frame { display: none !important; }
 }

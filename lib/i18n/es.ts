@@ -1,0 +1,202 @@
+import type { Translations } from "./types";
+
+export const es: Translations = {
+  nav: {
+    home: "Inicio",
+    about: "Sobre Mí",
+    services: "Servicios",
+    portfolio: "Portafolio",
+    quote: "Cotizar",
+    contact: "Contacto",
+  },
+  hero: {
+    badge: "Disponible para proyectos",
+    name: "Miguel Angel Lopez Puebla",
+    title: "Ingeniero de Software Backend",
+    titleAccent: "Desarrollo Cloud y APIs",
+    location: "Guadalajara, Jalisco",
+    ctaPortfolio: "Ver Portafolio",
+    ctaAbout: "Sobre Mí",
+  },
+  about: {
+    title: "Miguel Angel Lopez Puebla",
+    role: "Ingeniero de Software Backend — Desarrollo Cloud y APIs",
+    bio: "Ingeniero de Software con experiencia en desarrollo backend utilizando Golang, Python, PostgreSQL y tecnologías cloud. Especializado en desarrollo de APIs REST, optimización de bases de datos, arquitecturas modulares, testing automatizado y despliegues escalables en la nube. Enfocado en mantenibilidad, calidad de software y optimización de rendimiento.",
+    location: "Guadalajara, Jalisco, México",
+    education: "Tecnológico Superior de Jalisco — Ing. Sistemas Computacionales",
+    educationDetail: "Ingeniería en Sistemas Computacionales — 2019 – 2023",
+    license: "Cédula Profesional 15228724",
+    traits: "Autodidacta, honesto, comprometido, responsable",
+    hobbies: "Criador de serpientes y hormigas, tecnología, lectura",
+    experience: "Experiencia Profesional",
+    skills: "Habilidades Técnicas",
+    educationSection: "Educación",
+    skillsList: [
+      { title: "Lenguajes", skills: "Golang, TypeScript, Python, Java" },
+      { title: "Backend", skills: "APIs REST, SQLC, Microservicios, Arquitectura Modular" },
+      { title: "Bases de Datos", skills: "SQL, PostgreSQL, JSONB, Optimización de Consultas" },
+      { title: "Cloud & DevOps", skills: "AWS (EC2, S3, Lambda), Docker, Kubernetes, CI/CD" },
+      { title: "Testing", skills: "Testify, SQLMock, Unit Testing, Cobertura +95%" },
+      { title: "Monitoreo", skills: "Prometheus, Loki" },
+      { title: "Frontend & Web", skills: "React, Next.js" },
+      { title: "Herramientas", skills: "Git, GitHub, Postman, Beaver" },
+      { title: "Idiomas", skills: "Español (Nativo), Inglés (B2)" },
+      { title: "IA y Productividad", skills: "Claude Code, Cursor, GitHub Copilot, ChatGPT" },
+    ],
+    experienceList: [
+      {
+        role: "Appointmetly — Desarrollador Backend (Golang/Python)",
+        date: "Feb 2024 – Mar 2026",
+        achievements: [
+          "Lideré el diseño y desarrollo de más de 30 APIs REST utilizando arquitectura backend modular.",
+          "Desarrollé y mantuve microservicios backend utilizando Golang, Python, SQLC y PostgreSQL.",
+          "Optimicé consultas SQL complejas y estructuras JSONB para mejorar el rendimiento.",
+          "Alcancé una cobertura de testing automatizado superior al 95% utilizando Testify y SQLMock.",
+          "Gestioné despliegues cloud utilizando AWS EC2, S3 y Lambda con Docker y Kubernetes.",
+          "Integré soluciones de monitoreo y observabilidad utilizando Prometheus y Loki.",
+        ],
+      },
+      {
+        role: "Global Gas — Desarrollador Web",
+        date: "Jun 2023 – Feb 2024",
+        achievements: [
+          "Colaboré en la migración de un monolito en Java hacia una arquitectura de microservicios en Node.js.",
+          "Desarrollé middlewares de autenticación y manejo de errores para APIs backend.",
+          "Mejoré procesos de documentación técnica y onboarding utilizando Postman.",
+          "Participé en análisis de requerimientos técnicos y mejoras de servicios backend.",
+          "Trabajé en el mantenimiento y optimización de un sistema monolítico basado en Java.",
+        ],
+      },
+      {
+        role: "Freelance — Desarrollador Full Stack",
+        date: "2024 – Presente",
+        achievements: [
+          "Desarrollé aplicaciones web full stack utilizando React/Next.js y backends en Golang.",
+          "Implementé APIs REST y lógica de negocio backend utilizando Golang y PostgreSQL.",
+          "Diseñé arquitecturas escalables por capas utilizando handlers, services y repositories.",
+          "Optimicé estructuras relacionales en PostgreSQL y rendimiento de consultas SQL.",
+          "Configuré hosting, certificados SSL y entornos de despliegue.",
+        ],
+      },
+    ],
+  },
+  portfolio: {
+    title: "Portafolio",
+    description: "Algunos de los proyectos en los que he trabajado como desarrollador privado y freelance.",
+    projects: [
+      {
+        title: "Appointmetly - Gestión de Citas empresariales",
+        desc: "Lideré el diseño y desarrollo de +30 APIs REST con arquitectura modular en Go/Python. Optimización de consultas SQL y JSONB, cobertura de pruebas superior al 95% con Testify/SQLMock. Monitoreo con Prometheus y Loki.",
+        tags: ["Go", "Python", "PostgreSQL", "Docker", "Kubernetes", "AWS"],
+      },
+      {
+        title: "Migración Java a Microservicios — Global Gas",
+        desc: "Migración de monolito Java a microservicios Node.js con middlewares de autenticación y manejo de errores. Documentación técnica con Postman.",
+        tags: ["Java", "Node.js", "Express", "Microservicios"],
+      },
+      {
+        title: "Sistema Control Educativo",
+        desc: "Arquitectura escalable por capas (handlers, services, repositories) en Go y React. Optimización de consultas PostgreSQL mejorando carga en 20%. Despliegue con Docker.",
+        tags: ["Go", "React", "PostgreSQL", "Docker"],
+      },
+      {
+        title: "Estudio de Tatuajes - Reservas",
+        desc: "Frontend para gestión de reservas y portafolio con Next.js. Interfaz responsiva, configuración de hosting, certificados SSL y dominios.",
+        tags: ["TypeScript", "Next.js", "React"],
+      },
+      {
+        title: "Módulo de Administración y Galería",
+        desc: "Frontend administrativo para gestión de contenido dinámico con Next.js y React. Flujo de trabajo en Git/GitHub.",
+        tags: ["TypeScript", "Next.js", "React"],
+      },
+      {
+        title: "Sistema de Gestión Médica",
+        desc: "Frontend para gestión de consultorios médicos con Next.js y React. Interfaz optimizada para experiencia de usuario.",
+        tags: ["TypeScript", "Next.js", "React"],
+      },
+      {
+        title: "Semillera - Catálogo y Carrito de Compras",
+        desc: "Tienda en línea con catálogo de semillas, carrito de compras y creación de pedidos. Pago directo por WhatsApp. Desarrollado con Next.js y TypeScript.",
+        tags: ["TypeScript", "Next.js", "React"],
+      },
+      {
+        title: "Restaurante - Menú Digital",
+        desc: "Menú digital interactivo con React y TypeScript. Interfaz moderna orientada a rendimiento y experiencia de usuario.",
+        tags: ["React", "TypeScript", "Next.js"],
+      },
+      {
+        title: "Portafolio Personal",
+        desc: "Mi portafolio profesional construido con Next.js 16, React 19, Tailwind CSS v4 y shadcn/ui. Diseño responsivo, modo oscuro/claro, i18n Español/Inglés.",
+        tags: ["Next.js", "React", "TypeScript", "Tailwind"],
+      },
+    ],
+  },
+  services: {
+    title: "Tecnologías",
+    description: "Estas son algunas de las tecnologías con las que trabajo para construir soluciones robustas y escalables.",
+    subTitle: "Servicios",
+    subDescription: "Ofrezco soluciones completas para llevar tus ideas al siguiente nivel, desde el frontend hasta la infraestructura y la inteligencia artificial.",
+    technologies: [
+      { name: "Golang" },
+      { name: "Python" },
+      { name: "JavaScript" },
+      { name: "React" },
+    ],
+    categories: [
+      {
+        title: "Frontend",
+        description: "Interfaces modernas, responsivas y de alto rendimiento.",
+        services: [
+          { title: "Desarrollo Web", desc: "Aplicaciones web con React, Next.js y Tailwind CSS. Interfaces rápidas, accesibles y atractivas." },
+          { title: "Diseño UI/UX", desc: "Diseño de interfaces centradas en el usuario, responsivas y optimizadas para cualquier dispositivo." },
+        ],
+      },
+      {
+        title: "Backend",
+        description: "APIs robustas, microservicios y gestión de datos escalables.",
+        services: [
+          { title: "APIs y Microservicios", desc: "Desarrollo de APIs REST y microservicios escalables en Go, Python y Node.js." },
+          { title: "Bases de Datos", desc: "Diseño, implementación y optimización de bases de datos relacionales y NoSQL." },
+          { title: "Contenedores y Orquestación", desc: "Containerización con Docker y orquestación con Kubernetes para despliegues escalables." },
+        ],
+      },
+      {
+        title: "Infraestructura",
+        description: "Instalación, cableado y mantenimiento de servidores y equipos de cómputo.",
+        services: [
+          { title: "Instalación y Cableado de Servidores", desc: "Montaje de racks, cableado estructurado, configuración de redes y puesta en marcha." },
+          { title: "Mantenimiento de Equipos", desc: "Optimización, limpieza, formateo y actualización de equipos de cómputo." },
+          { title: "Instalación de Software", desc: "Instalación y configuración de software de desarrollo, servidores y bases de datos." },
+          { title: "Soporte Técnico", desc: "Asistencia remota y presencial en infraestructura TI: redes, despliegue y administración de sistemas." },
+        ],
+      },
+      {
+        title: "Inteligencia Artificial",
+        description: "Integración de servicios de IA y automatización inteligente.",
+        services: [
+          { title: "Integración de APIs de IA", desc: "Conexión con OpenAI, Google AI, Claude y otras plataformas para potenciar aplicaciones." },
+          { title: "Automatización Inteligente", desc: "Procesos automatizados con IA: análisis de datos, generación de contenido y toma de decisiones." },
+          { title: "Chatbots y Asistentes", desc: "Desarrollo de chatbots y asistentes virtuales con procesamiento de lenguaje natural." },
+        ],
+      },
+    ],
+  },
+  contact: {
+    title: "Contacto",
+    description: "Envíame un mensaje directo por WhatsApp.",
+    name: "Nombre",
+    phone: "Teléfono",
+    email: "Correo electrónico",
+    subject: "Asunto",
+    message: "Mensaje",
+    send: "Enviar por WhatsApp",
+  },
+  footer: {
+    tagline: "Desarrollador Backend & Cloud",
+  },
+  notFound: {
+    title: "Página no encontrada",
+    message: "La ruta que buscas no existe o fue movida. Mejor vuelve al inicio.",
+    button: "Volver al inicio",
+  },
+};

@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import Script from "next/script";
+import { LanguageProvider } from "@/components/common/LanguageProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,28 +44,31 @@ export default function RootLayout({
       lang="es"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
-      data-scroll-behavior="smooth"
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){
+              try {
+                var t = localStorage.getItem("theme");
+                if (t === "light") document.documentElement.classList.add("light");
+              } catch(e) {}
+            })()`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
         <ThemeProvider>
-          <Navbar />
-          <main className="flex-grow pt-16">
-            {children}
-          </main>
-          <Footer />
-          <div className="fixed top-[-10%] left-[-10%] w-[40%] aspect-square rounded-full bg-purple-900/20 blur-[120px] -z-10" />
-          <div className="fixed bottom-[-10%] right-[-10%] w-[30%] aspect-square rounded-full bg-blue-900/10 blur-[120px] -z-10" />
+          <LanguageProvider>
+            <Navbar />
+            <main className="flex-grow pt-16">
+              {children}
+            </main>
+            <Footer />
+            <div className="fixed top-[-10%] left-[-10%] w-[40%] aspect-square rounded-full bg-purple-900/20 blur-[120px] -z-10" />
+            <div className="fixed bottom-[-10%] right-[-10%] w-[30%] aspect-square rounded-full bg-blue-900/10 blur-[120px] -z-10" />
+          </LanguageProvider>
         </ThemeProvider>
-        <Script id="gt-init" strategy="beforeInteractive">
-          {`function googleTranslateElementInit(){
-            new google.translate.TranslateElement({
-              pageLanguage:"es",
-              includedLanguages:"es,en,fr,de,pt,it,ja,ko,zh-CN",
-              layout:google.translate.TranslateElement.InlineLayout.SIMPLE,
-              autoDisplay:false
-            },"google_translate_element");
-          }`}
-        </Script>
       </body>
     </html>
   );
