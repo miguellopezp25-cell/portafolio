@@ -8,6 +8,8 @@ export const en: Translations = {
     portfolio: "Portfolio",
     quote: "Quote",
     contact: "Contact",
+    aiAssistant: "AI Assistant",
+    roadmap: "Roadmap",
   },
   hero: {
     badge: "Available for projects",

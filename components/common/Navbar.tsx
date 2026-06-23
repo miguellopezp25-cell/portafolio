@@ -19,6 +19,8 @@ export default function Navbar() {
     { name: t.nav.portfolio, href: "/portfolio" },
     { name: t.nav.quote, href: "/cotizar" },
     { name: t.nav.contact, href: "/contacto" },
+    { name: t.nav.aiAssistant, href: "/ai-assistant" },
+    { name: t.nav.roadmap, href: "/roadmap" },
   ];
 
   return (

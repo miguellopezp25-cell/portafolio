@@ -28,6 +28,14 @@ export const metadata: Metadata = {
     siteName: "Miguel Angel Lopez",
     locale: "es_MX",
     type: "website",
+    images: [{ url: "https://miguellopez.dev/projects/photoofme.png", width: 224, height: 224 }],
+  },
+  twitter: {
+    card: "summary",
+    title: "Miguel Angel Lopez | Ingeniero de Software Backend",
+    description:
+      "Ingeniero de Software Backend especializado en Golang, Python, APIs REST, microservicios y cloud (AWS).",
+    images: ["https://miguellopez.dev/projects/photoofme.png"],
   },
   robots: {
     index: true,
@@ -40,6 +48,54 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        name: "Miguel Angel Lopez Puebla",
+        givenName: "Miguel Angel",
+        familyName: "Lopez Puebla",
+        jobTitle: "Backend Software Engineer",
+        description:
+          "Ingeniero de Software Backend especializado en Golang, Python, APIs REST, microservicios y cloud (AWS).",
+        url: "https://miguellopez.dev",
+        email: "Miguel.Lopezp25@gmail.com",
+        telephone: "+523328359296",
+        image: "https://miguellopez.dev/projects/photoofme.png",
+        sameAs: [
+          "https://github.com/miguellopezp25-cell",
+          "https://www.linkedin.com/in/miguel-lopezp25/",
+        ],
+        knowsAbout: [
+          "Golang",
+          "Python",
+          "TypeScript",
+          "PostgreSQL",
+          "AWS",
+          "Docker",
+          "Kubernetes",
+          "APIs REST",
+          "Microservicios",
+        ],
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Guadalajara",
+          addressRegion: "Jalisco",
+          addressCountry: "MX",
+        },
+      },
+      {
+        "@type": "WebSite",
+        url: "https://miguellopez.dev",
+        name: "Miguel Angel Lopez | Ingeniero de Software Backend",
+        description:
+          "Portafolio profesional de Miguel Angel Lopez, Ingeniero de Software Backend especializado en Golang, Python y cloud.",
+        inLanguage: ["es", "en"],
+      },
+    ],
+  }
+
   return (
     <html
       lang="es"
@@ -47,6 +103,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){

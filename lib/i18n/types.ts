@@ -8,6 +8,8 @@ export interface Translations {
     portfolio: string;
     quote: string;
     contact: string;
+    aiAssistant: string;
+    roadmap: string;
   };
   hero: {
     badge: string;
