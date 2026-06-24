@@ -9,13 +9,23 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
   pnpm install --frozen-lockfile
 
+# ========================================================
+# ¡AQUÍ ES DONDE SUCEDE LA MAGIA! (Etapa de Builder)
+# ========================================================
 FROM base AS builder
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# 1. Le decimos a Docker que espere esta variable desde Railway durante el Build
+ARG NEXT_PUBLIC_GO_API_URL
+# 2. La asignamos como variable de entorno para que Next.js la pueda leer al compilar
+ENV NEXT_PUBLIC_GO_API_URL=$NEXT_PUBLIC_GO_API_URL
+
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
   pnpm install --frozen-lockfile --offline && \
   pnpm build
+# ========================================================
 
 FROM base AS runner
 WORKDIR /app
