@@ -19,7 +19,8 @@ export default function Navbar() {
     { name: t.nav.portfolio, href: "/portfolio" },
     { name: t.nav.quote, href: "/cotizar" },
     { name: t.nav.contact, href: "/contacto" },
-    { name: t.nav.roadmap, href: "/roadmap" },
+    { name: t.nav.register, href: "/register" },
+    { name: t.nav.visitors, href: "/admin/visitors" },
   ];
 
   return (

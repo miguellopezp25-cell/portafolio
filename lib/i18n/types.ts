@@ -9,6 +9,8 @@ export interface Translations {
     quote: string;
     contact: string;
     roadmap: string;
+    register: string;
+    visitors: string;
   };
   hero: {
     badge: string;

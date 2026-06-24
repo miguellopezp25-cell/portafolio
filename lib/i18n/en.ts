@@ -9,6 +9,8 @@ export const en: Translations = {
     quote: "Quote",
     contact: "Contact",
     roadmap: "Roadmap",
+    register: "Register",
+    visitors: "Visitors",
   },
   hero: {
     badge: "Available for projects",
