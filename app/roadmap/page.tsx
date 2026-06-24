@@ -15,7 +15,7 @@ const todos: Record<string, { items: TodoItem[]; icon: typeof CheckCircle2; colo
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/30",
     items: [
-      { text: "Home, About, Portfolio, Services, Cotizar, Contacto, AI Assistant, 404, Loading", priority: "high" },
+      { text: "Home, About, Portfolio, Services, Cotizar, Contacto, 404, Loading", priority: "high" },
       { text: "Navbar, Footer, FloatingOrbs, ThemeToggle, LanguageToggle, UI (Button, Card, Badge)", priority: "high" },
       { text: "i18n Español/Inglés con typescript tipado", priority: "high" },
       { text: "Modo oscuro/claro con persistencia en localStorage", priority: "high" },
@@ -24,12 +24,12 @@ const todos: Record<string, { items: TodoItem[]; icon: typeof CheckCircle2; colo
       { text: "Formulario de contacto vía WhatsApp", priority: "medium" },
       { text: "Portafolio con 9 proyectos y tags", priority: "medium" },
       { text: "Animaciones (orbs, fade-in, bordes gradiente)", priority: "low" },
-      { text: "Proxy API route para AI Assistant (seguridad)", priority: "high" },
+
       { text: "Metadata por página (SEO: titles, OG tags)", priority: "high" },
       { text: "Error boundary global (error.tsx)", priority: "high" },
       { text: "Open Graph image + Twitter Card", priority: "high" },
       { text: "JSON-LD structured data (Person + WebSite schema)", priority: "high" },
-      { text: "Sitemap actualizado con /ai-assistant y /roadmap", priority: "high" },
+      { text: "Sitemap actualizado con /roadmap", priority: "high" },
     ],
   },
   inProgress: {
