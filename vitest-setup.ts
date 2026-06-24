@@ -2,6 +2,7 @@ import "@testing-library/jest-dom/vitest"
 
 const intersectionCallbacks = new Map<Element, IntersectionObserverCallback>()
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ;(globalThis as any).__triggerIntersection = (isIntersecting: boolean) => {
   for (const cb of intersectionCallbacks.values()) {
     cb([{ isIntersecting, intersectionRatio: isIntersecting ? 1 : 0 } as IntersectionObserverEntry], null as unknown as IntersectionObserver)
