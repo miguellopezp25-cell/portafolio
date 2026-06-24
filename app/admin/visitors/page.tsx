@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { listVisitors, type Visitor } from "@/lib/api-backend"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,7 +11,7 @@ export default function AdminVisitorsPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
 
-  async function fetchVisitors() {
+  const fetchVisitors = useCallback(async () => {
     setLoading(true)
     setError("")
     try {
@@ -22,11 +22,12 @@ export default function AdminVisitorsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchVisitors()
-  }, [])
+  }, [fetchVisitors])
 
   return (
     <section className="max-w-4xl mx-auto px-6 py-20 space-y-8">

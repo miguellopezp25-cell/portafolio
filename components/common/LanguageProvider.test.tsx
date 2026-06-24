@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest"
+import { describe, it, expect, beforeEach } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { LanguageProvider, useLanguage } from "./LanguageProvider"
 import { type ReactNode } from "react"

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest"
-import { render, act, screen } from "@testing-library/react"
+import { render, act } from "@testing-library/react"
 import { useInView } from "./use-in-view"
 import type { FC } from "react"
 

@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Check, X, Calculator, DollarSign, Info } from "lucide-react"
+import { Check, Calculator, DollarSign, Info } from "lucide-react"
 
 type ProjectType = "landing" | "institucional" | "blog" | "ecommerce" | "saas" | "dashboard"
 type AddonKey =
