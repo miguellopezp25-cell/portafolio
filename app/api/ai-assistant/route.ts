@@ -21,7 +21,7 @@ export async function POST(req: Request) {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
+        model: "claude-sonnet-4-20250506",
         max_tokens: 1000,
         messages: [{ role: "user", content: prompt }],
       }),
@@ -30,8 +30,10 @@ export async function POST(req: Request) {
     if (!res.ok) {
       const error = await res.text()
       console.error("Anthropic API error:", res.status, error)
+      const error = await res.text()
+      console.error("Anthropic API error:", res.status, error)
       return NextResponse.json(
-        { error: `Error de la API de Anthropic: ${res.status}` },
+        { error: `Error de la API de Anthropic: ${res.status} — ${error}` },
         { status: res.status }
       )
     }
