@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Terminal, MapPin, Mail, Phone, Code, CheckCircle, Building2, Cloud, FolderOpen } from "lucide-react";
 import { useLanguage } from "@/components/common/LanguageProvider";
+import GoLink from "@/components/common/GoLink";
 
 const stats = [
   { icon: Code, value: "3+", labelKey: "Años experiencia", labelKeyEn: "Years exp." },
@@ -30,7 +31,7 @@ export default function Home() {
         </h1>
 
         <p className="text-xl md:text-2xl text-muted-foreground font-medium">
-          {t.hero.title} —{" "}
+          <GoLink text={t.hero.title} /> —{" "}
           <span className="text-purple-400">{t.hero.titleAccent}</span>
         </p>
 

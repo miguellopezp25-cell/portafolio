@@ -33,6 +33,7 @@ const projectMeta: (Pick<Project, "links" | "image" | "colors">)[] = [
   { image: "/projects/semillas.png" },
   { image: "/projects/restaurant.png" },
   { links: [repoLink], image: "/projects/portfolio.png" },
+  { links: [{ label: "Código fuente", url: "https://github.com/miguellopezp25-cell/crypto-tracker-go-react", icon: "github" }], colors: ["rgb(255, 200, 0)", "rgb(0, 200, 255)"] },
 ];
 
 function FadeInCard({ children, delay }: { children: React.ReactNode; delay: number }) {

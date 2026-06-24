@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useLanguage } from "@/components/common/LanguageProvider";
+import GoLink from "@/components/common/GoLink";
 import { Phone, MapPin, GraduationCap, BadgeCheck, Heart, Sparkles, Mail, Calendar, ChevronRight } from "lucide-react";
 import { useInView } from "@/lib/use-in-view";
 
@@ -24,10 +25,10 @@ export default function AboutPage() {
 
         <div className="flex-1 space-y-6">
           <h1 className="text-4xl font-semibold text-foreground">{t.about.title}</h1>
-          <p className="text-lg text-purple-400 font-medium">{t.about.role}</p>
+          <p className="text-lg text-purple-400 font-medium"><GoLink text={t.about.role} /></p>
 
           <div className="space-y-4 text-muted-foreground leading-relaxed">
-            <p>{t.about.bio}</p>
+            <p><GoLink text={t.about.bio} /></p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -109,6 +110,35 @@ export default function AboutPage() {
             <h3 className="text-xl font-semibold text-foreground">Tecnológico Superior de Jalisco</h3>
             <p className="text-muted-foreground">{t.about.educationDetail}</p>
             <p className="text-sm text-muted-foreground flex items-center gap-2"><BadgeCheck size={14} className="text-purple-400" /> {t.about.license}</p>
+          </div>
+        </div>
+      </FadeInSection>
+
+      <FadeInSection>
+        <div className="space-y-6">
+          <h2 className="text-3xl font-semibold text-foreground">{t.about.certificatesSection}</h2>
+          <div className="grid grid-cols-1 gap-4">
+            {t.about.certificatesList.map((cert) => (
+              <div key={cert.title} className="flex flex-col sm:flex-row rounded-xl border border-border bg-card overflow-hidden transition-all duration-300 hover:border-purple-500/50 hover:shadow-md">
+                <div className="sm:w-1/3 shrink-0">
+                  <Image
+                    src={cert.image}
+                    alt={cert.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-5 space-y-2 flex-1">
+                  <h3 className="text-lg font-semibold text-foreground">{cert.title}</h3>
+                  <p className="text-sm text-purple-400">{cert.issuer}</p>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                    <span className="flex items-center gap-1"><Calendar size={14} className="text-purple-400" /> {cert.date}</span>
+                    <span className="flex items-center gap-1"><BadgeCheck size={14} className="text-purple-400" /> ID: {cert.credentialId}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </FadeInSection>

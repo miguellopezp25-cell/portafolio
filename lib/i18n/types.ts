@@ -33,6 +33,14 @@ export interface Translations {
     experience: string;
     skills: string;
     educationSection: string;
+    certificatesSection: string;
+    certificatesList: {
+      title: string;
+      issuer: string;
+      date: string;
+      credentialId: string;
+      image: string;
+    }[];
     skillsList: { title: string; skills: string }[];
     experienceList: {
       role: string;

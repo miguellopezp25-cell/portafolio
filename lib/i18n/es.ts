@@ -14,16 +14,16 @@ export const es: Translations = {
   hero: {
     badge: "Disponible para proyectos",
     name: "Miguel Angel Lopez Puebla",
-    title: "Ingeniero de Software Backend",
-    titleAccent: "Desarrollo Cloud y APIs",
+    title: "Backend Engineer especializado en Go",
+    titleAccent: "Flexible en otras tecnologías",
     location: "Guadalajara, Jalisco",
     ctaPortfolio: "Ver Portafolio",
     ctaAbout: "Sobre Mí",
   },
   about: {
     title: "Miguel Angel Lopez Puebla",
-    role: "Ingeniero de Software Backend — Desarrollo Cloud y APIs",
-    bio: "Ingeniero de Software con experiencia en desarrollo backend utilizando Golang, Python, PostgreSQL y tecnologías cloud. Especializado en desarrollo de APIs REST, optimización de bases de datos, arquitecturas modulares, testing automatizado y despliegues escalables en la nube. Enfocado en mantenibilidad, calidad de software y optimización de rendimiento.",
+    role: "Backend Engineer — Go • Python • TypeScript",
+    bio: "Backend Engineer especializado en Go, con experiencia en Python, TypeScript, Node.js y PostgreSQL. Enfocado en APIs REST, arquitectura modular, testing y despliegues cloud. Me adapto rápido a cualquier stack —para mí la tecnología es una herramienta, no una etiqueta.",
     location: "Guadalajara, Jalisco, México",
     education: "Tecnológico Superior de Jalisco — Ing. Sistemas Computacionales",
     educationDetail: "Ingeniería en Sistemas Computacionales — 2019 – 2023",
@@ -33,6 +33,16 @@ export const es: Translations = {
     experience: "Experiencia Profesional",
     skills: "Habilidades Técnicas",
     educationSection: "Educación",
+    certificatesSection: "Certificados",
+    certificatesList: [
+      {
+        title: "Course Completed: ClaudeCode",
+        issuer: "Master.dev (Formerly Frontend Masters)",
+        date: "jun. 2026",
+        credentialId: "a5f28bdfa7-ONCeVpyzkJ",
+        image: "/certificado_claude.png",
+      },
+    ],
     skillsList: [
       { title: "Lenguajes", skills: "Golang, TypeScript, Python, Java" },
       { title: "Backend", skills: "APIs REST, SQLC, Microservicios, Arquitectura Modular" },
@@ -131,6 +141,11 @@ export const es: Translations = {
         desc: "Mi portafolio profesional construido con Next.js 16, React 19, Tailwind CSS v4 y shadcn/ui. Diseño responsivo, modo oscuro/claro, i18n Español/Inglés.",
         tags: ["Next.js", "React", "TypeScript", "Tailwind"],
       },
+      {
+        title: "Crypto Tracker — Precios en Tiempo Real",
+        desc: "App full-stack que rastrea precios de criptomonedas en vivo desde la API de Binance. Backend en Go con Gin, frontend en React con Vite, Tailwind CSS y shadcn/ui. Actualización cada 500ms con indicadores de cambio de precio.",
+        tags: ["Go", "React", "TypeScript", "Gin", "Binance API", "Tailwind CSS"],
+      },
     ],
   },
   services: {
@@ -194,7 +209,7 @@ export const es: Translations = {
     send: "Enviar por WhatsApp",
   },
   footer: {
-    tagline: "Desarrollador Backend & Cloud",
+    tagline: "Backend Engineer • especialista en Go",
   },
   notFound: {
     title: "Página no encontrada",
