@@ -1,4 +1,4 @@
-const API_BASE = "https://backend-go-portfolio-production.up.railway.app"
+const API_BASE = process.env.NEXT_PUBLIC_GO_API_URL ?? "http://localhost:8080"
 
 export interface Visitor {
   id: string
