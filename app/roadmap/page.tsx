@@ -38,7 +38,8 @@ const todos: Record<string, { items: TodoItem[]; icon: typeof CheckCircle2; colo
     bg: "bg-blue-500/10",
     border: "border-blue-500/30",
     items: [
-      { text: "Asistente IA con Claude (carrera/roadmap) — recién agregado", priority: "high" },
+      { text: "Dockerfile para contenerización", priority: "high" },
+      { text: "CI pipeline (GitHub Actions: lint, type-check, build)", priority: "high" },
     ],
   },
   pending: {
@@ -62,8 +63,7 @@ const todos: Record<string, { items: TodoItem[]; icon: typeof CheckCircle2; colo
       { text: "Analíticas (Plausible/Umami o Vercel Analytics)", priority: "medium" },
       { text: "Blog o artículos técnicos", priority: "medium" },
       { text: "Páginas de detalle de proyectos (case studies)", priority: "medium" },
-      { text: "Dockerfile para contenerización", priority: "low" },
-      { text: "CI pipeline (GitHub Actions: lint, type-check, build)", priority: "low" },
+
       { text: "PWA (manifest.json + service worker)", priority: "low" },
       { text: "Breadcrumbs / Back-to-top button", priority: "low" },
       { text: "Focus trapping en menú móvil (accesibilidad)", priority: "low" },
