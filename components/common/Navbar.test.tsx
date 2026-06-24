@@ -27,8 +27,8 @@ describe("Navbar", () => {
     expect(screen.getByText("Portafolio")).toBeInTheDocument()
     expect(screen.getByText("Cotizar")).toBeInTheDocument()
     expect(screen.getByText("Contacto")).toBeInTheDocument()
-    expect(screen.getByText("Asistente IA")).toBeInTheDocument()
-    expect(screen.getByText("Roadmap")).toBeInTheDocument()
+    expect(screen.getByText("Registrar")).toBeInTheDocument()
+    expect(screen.getByText("Visitantes")).toBeInTheDocument()
   })
 
   it("renders theme and language toggles", () => {

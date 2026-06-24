@@ -28,6 +28,6 @@ describe("Roadmap Page", () => {
   })
 
   it("renders task items", () => {
-    expect(screen.getByText(/Asistente IA con Claude/)).toBeInTheDocument()
+    expect(screen.getByText(/Cotizador interactivo con envío a WhatsApp/)).toBeInTheDocument()
   })
 })

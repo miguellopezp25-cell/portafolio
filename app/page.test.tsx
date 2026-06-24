@@ -22,7 +22,7 @@ describe("Home Page", () => {
   })
 
   it("renders hero title", () => {
-    expect(screen.getByText(/Ingeniero de Software Backend/)).toBeInTheDocument()
+    expect(screen.getByText(/Backend Engineer especializado en/)).toBeInTheDocument()
   })
 
   it("renders CTA buttons", () => {

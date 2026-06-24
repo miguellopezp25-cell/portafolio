@@ -11,7 +11,7 @@ function renderWithProvider(ui: ReactNode) {
 describe("Footer", () => {
   it("renders tagline from translations", () => {
     renderWithProvider(<Footer />)
-    expect(screen.getByText("Desarrollador Backend & Cloud")).toBeInTheDocument()
+    expect(screen.getByText(/Backend Engineer/)).toBeInTheDocument()
   })
 
   it("renders social links", () => {

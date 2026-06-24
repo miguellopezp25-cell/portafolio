@@ -22,7 +22,7 @@ describe("About Page", () => {
   })
 
   it("renders the role", () => {
-    expect(screen.getByText(/Ingeniero de Software Backend/)).toBeInTheDocument()
+    expect(screen.getByText(/Backend Engineer —/)).toBeInTheDocument()
   })
 
   it("renders the bio", () => {
