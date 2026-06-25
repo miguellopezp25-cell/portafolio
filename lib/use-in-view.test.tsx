@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest"
+import { afterEach, beforeEach, describe, it, expect, vi } from "vitest"
 import { render, act } from "@testing-library/react"
 import { useInView } from "./use-in-view"
 import type { FC } from "react"
@@ -18,6 +18,27 @@ function createTestComponent(threshold?: number): [() => boolean, FC] {
 }
 
 describe("useInView", () => {
+  beforeEach(() => {
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      writable: true,
+      value: vi.fn().mockReturnValue({
+        matches: false,
+        media: "(prefers-reduced-motion: reduce)",
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      }),
+    })
+  })
+
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it("returns inView=false initially", () => {
     const [getInView, Component] = createTestComponent()
     render(<Component />)
@@ -54,5 +75,25 @@ describe("useInView", () => {
     const { unmount } = render(<Component />)
     unmount()
     expect(disconnect).toHaveBeenCalledOnce()
+  })
+
+  it("sets inView=true immediately when reduced motion is preferred", () => {
+    vi.spyOn(window, "matchMedia").mockReturnValue({
+      matches: true,
+      media: "(prefers-reduced-motion: reduce)",
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })
+
+    const observe = vi.spyOn(window.IntersectionObserver.prototype, "observe")
+    const [getInView, Component] = createTestComponent()
+    render(<Component />)
+
+    expect(getInView()).toBe(true)
+    expect(observe).not.toHaveBeenCalled()
   })
 })

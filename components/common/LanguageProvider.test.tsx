@@ -21,6 +21,7 @@ function renderWithProvider(ui: ReactNode) {
 describe("LanguageProvider", () => {
   beforeEach(() => {
     document.documentElement.lang = ""
+    localStorage.clear()
   })
 
   it("defaults to Spanish", () => {
@@ -34,6 +35,7 @@ describe("LanguageProvider", () => {
     await userEvent.click(screen.getByText("Set EN"))
     expect(screen.getByTestId("lang").textContent).toBe("en")
     expect(document.documentElement.lang).toBe("en")
+    expect(localStorage.getItem("lang")).toBe("en")
   })
 
   it("changes language to Spanish", async () => {
@@ -42,5 +44,12 @@ describe("LanguageProvider", () => {
     await userEvent.click(screen.getByText("Set ES"))
     expect(screen.getByTestId("lang").textContent).toBe("es")
     expect(document.documentElement.lang).toBe("es")
+    expect(localStorage.getItem("lang")).toBe("es")
+  })
+
+  it("uses the persisted language", () => {
+    localStorage.setItem("lang", "en")
+    renderWithProvider(<TestConsumer />)
+    expect(screen.getByTestId("lang").textContent).toBe("en")
   })
 })

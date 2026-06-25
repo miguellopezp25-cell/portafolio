@@ -7,6 +7,8 @@ export default function FloatingOrbs() {
   const orb2 = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     let raf: number;
     let mx = 0, my = 0;
     let cx1 = 0, cy1 = 0;

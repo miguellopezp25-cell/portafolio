@@ -4,6 +4,8 @@ import { createContext, useContext, useState, useCallback } from "react";
 import type { Lang, Translations } from "@/lib/i18n/types";
 import { translations, defaultLang } from "@/lib/i18n";
 
+const LANGUAGE_STORAGE_KEY = "lang";
+
 interface LanguageContextType {
   lang: Lang;
   t: Translations;
@@ -16,11 +18,21 @@ const LanguageContext = createContext<LanguageContextType>({
   setLang: () => {},
 });
 
+function getInitialLang(): Lang {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    if (stored === "en" || stored === "es") return stored;
+  }
+
+  return defaultLang;
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(defaultLang);
+  const [lang, setLangState] = useState<Lang>(getInitialLang);
 
   const setLang = useCallback((newLang: Lang) => {
     setLangState(newLang);
+    localStorage.setItem(LANGUAGE_STORAGE_KEY, newLang);
     document.documentElement.lang = newLang === "en" ? "en" : "es";
   }, []);
 

@@ -6,6 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Users, RefreshCw, MapPin, Globe, Mail, Loader2 } from "lucide-react"
 
+function splitMaskedEmail(email: string) {
+  return {
+    visible: email.slice(0, 3),
+    hidden: email.slice(3),
+  }
+}
+
 export default function AdminVisitorsPage() {
   const [visitors, setVisitors] = useState<Visitor[]>([])
   const [loading, setLoading] = useState(true)
@@ -75,33 +82,42 @@ export default function AdminVisitorsPage() {
 
       {!loading && visitors.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {visitors.map((v) => (
-            <Card key={v.id} className="hover:border-purple-500/30 transition-colors">
-              <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <Users size={16} className="text-purple-400" />
-                  {v.name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Mail size={14} className="text-purple-400" />
-                  {v.email}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Globe size={14} className="text-purple-400" />
-                  {v.country}
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin size={14} className="text-purple-400" />
-                  {v.city}
-                </div>
-                <Badge variant="secondary" className="text-xs font-mono mt-2">
-                  {v.id.slice(0, 8)}...
-                </Badge>
-              </CardContent>
-            </Card>
-          ))}
+          {visitors.map((v) => {
+            const maskedEmail = splitMaskedEmail(v.email)
+
+            return (
+              <Card key={v.id} className="hover:border-purple-500/30 transition-colors">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <Users size={16} className="text-purple-400" />
+                    {v.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Mail size={14} className="text-purple-400" />
+                    <span aria-label="Correo parcialmente oculto">
+                      {maskedEmail.visible}
+                      <span className="blur-sm select-none opacity-70" aria-hidden="true">
+                        {maskedEmail.hidden}
+                      </span>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Globe size={14} className="text-purple-400" />
+                    {v.country}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MapPin size={14} className="text-purple-400" />
+                    {v.city}
+                  </div>
+                  <Badge variant="secondary" className="text-xs font-mono mt-2">
+                    {v.id.slice(0, 8)}...
+                  </Badge>
+                </CardContent>
+              </Card>
+            )
+          })}
         </div>
       )}
     </section>

@@ -11,6 +11,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { t } = useLanguage();
+  const mobileMenuId = "mobile-navigation";
 
   const links = [
     { name: t.nav.home, href: "/" },
@@ -55,7 +56,9 @@ export default function Navbar() {
           <button
             className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Abrir menú"
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={mobileOpen}
+            aria-controls={mobileMenuId}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -71,7 +74,7 @@ export default function Navbar() {
             className="fixed inset-0 z-40 md:hidden"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="absolute top-16 left-0 w-full bg-background/95 backdrop-blur-xl border-b border-border md:hidden z-50">
+          <div id={mobileMenuId} className="absolute top-16 left-0 w-full bg-background/95 backdrop-blur-xl border-b border-border md:hidden z-50">
             <div className="flex flex-col px-6 py-4 gap-2">
               {links.map((link) => (
                 <Link
