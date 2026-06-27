@@ -41,7 +41,21 @@ export const es: Translations = {
         issuer: "Master.dev (Formerly Frontend Masters)",
         date: "jun. 2026",
         credentialId: "a5f28bdfa7-ONCeVpyzkJ",
-        image: "/certificado_claude.png",
+        image: "/certificado_claude.webp",
+      },
+      {
+        title: "Golang Curso Completo 2026",
+        issuer: "Instructor Alex Roel",
+        date: "15 febrero 2026",
+        credentialId: "",
+        image: "/go_cert.webp",
+      },
+      {
+        title: "Certificado Desarrollo con IA con Agentes",
+        issuer: "BIG School",
+        date: "26/06/2026",
+        credentialId: "",
+        image: "/IA_cert.webp",
       },
     ],
     skillsList: [

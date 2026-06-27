@@ -27,12 +27,12 @@ const projectMeta: (Pick<Project, "links" | "image" | "colors">)[] = [
   { links: [{ label: "Código fuente", url: "https://github.com/miguellopezp25-cell", icon: "github" }], colors: ["rgb(147,51,234)", "rgb(0,255,255)"] },
   { colors: ["rgb(0,255,100)", "rgb(0,100,255)"] },
   { colors: ["rgb(255,100,0)", "rgb(255,0,200)"] },
-  { links: [{ label: "Demo", url: "https://tattosale1.netlify.app", icon: "demo" }], image: "/projects/tatuajes-1.png" },
-  { image: "/projects/tatuajes-2.png" },
-  { image: "/projects/consultorio-medico.png" },
-  { image: "/projects/semillas.png" },
-  { image: "/projects/restaurant.png" },
-  { links: [repoLink], image: "/projects/portfolio.png" },
+  { links: [{ label: "Demo", url: "https://tattosale1.netlify.app", icon: "demo" }], image: "/projects/tatuajes-1.webp" },
+  { image: "/projects/tatuajes-2.webp" },
+  { image: "/projects/consultorio-medico.webp" },
+  { image: "/projects/semillas.webp" },
+  { image: "/projects/restaurant.webp" },
+  { links: [repoLink], image: "/projects/portfolio.webp" },
   { links: [{ label: "Código fuente", url: "https://github.com/miguellopezp25-cell/crypto-tracker-go-react", icon: "github" }], colors: ["rgb(255, 200, 0)", "rgb(0, 200, 255)"] },
 ];
 

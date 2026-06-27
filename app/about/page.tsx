@@ -14,7 +14,7 @@ export default function AboutPage() {
         <div className="shrink-0">
           <div className="size-56 rounded-2xl border-2 border-border bg-card overflow-hidden">
             <Image
-              src="/projects/photoofme.png"
+              src="/projects/photoofme.webp"
               alt="Foto de Miguel"
               width={224}
               height={224}
@@ -134,7 +134,9 @@ export default function AboutPage() {
                   <p className="text-sm text-purple-400">{cert.issuer}</p>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1"><Calendar size={14} className="text-purple-400" /> {cert.date}</span>
-                    <span className="flex items-center gap-1"><BadgeCheck size={14} className="text-purple-400" /> ID: {cert.credentialId}</span>
+                    {cert.credentialId ? (
+                      <span className="flex items-center gap-1"><BadgeCheck size={14} className="text-purple-400" /> ID: {cert.credentialId}</span>
+                    ) : null}
                   </div>
                 </div>
               </div>

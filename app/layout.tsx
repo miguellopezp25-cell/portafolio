@@ -28,14 +28,14 @@ export const metadata: Metadata = {
     siteName: "Miguel Angel Lopez",
     locale: "es_MX",
     type: "website",
-    images: [{ url: "https://miguellopez.dev/projects/photoofme.png", width: 224, height: 224 }],
+    images: [{ url: "https://miguellopez.dev/projects/photoofme.webp", width: 224, height: 224 }],
   },
   twitter: {
     card: "summary",
     title: "Miguel Angel Lopez | Ingeniero de Software Backend",
     description:
       "Ingeniero de Software Backend especializado en Golang, Python, APIs REST, microservicios y cloud (AWS).",
-    images: ["https://miguellopez.dev/projects/photoofme.png"],
+    images: ["https://miguellopez.dev/projects/photoofme.webp"],
   },
   robots: {
     index: true,
@@ -62,7 +62,7 @@ export default function RootLayout({
         url: "https://miguellopez.dev",
         email: "Miguel.Lopezp25@gmail.com",
         telephone: "+523328359296",
-        image: "https://miguellopez.dev/projects/photoofme.png",
+        image: "https://miguellopez.dev/projects/photoofme.webp",
         sameAs: [
           "https://github.com/miguellopezp25-cell",
           "https://www.linkedin.com/in/miguel-lopezp25/",
