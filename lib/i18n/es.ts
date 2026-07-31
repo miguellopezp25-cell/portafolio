@@ -13,7 +13,7 @@ export const es: Translations = {
     visitors: "Visitantes",
   },
   hero: {
-    badge: "Disponible para proyectos",
+    badge: "No disponible actualmente",
     name: "Miguel Angel Lopez Puebla",
     title: "Backend Engineer especializado en Go",
     titleAccent: "Flexible en otras tecnologías",
@@ -72,6 +72,18 @@ export const es: Translations = {
     ],
     experienceList: [
       {
+        role: "VIMIFOS — Backend Engineer",
+        date: "Jul 2026 – Presente",
+        achievements: [
+          "Trabajo en la migración de sistemas legacy en PHP hacia servicios backend en TypeScript.",
+          "Diseño e implementación de lambdas y mini microservicios para separar responsabilidades del sistema.",
+          "Implemento autenticación y autorización utilizando JWT y Amazon Cognito.",
+          "Valido contratos y datos de entrada con Zod para mejorar seguridad y mantenibilidad.",
+          "Desarrollo acceso a datos con Kysely sobre PostgreSQL y modelos complementarios en DynamoDB.",
+          "Participo en mejoras de arquitectura, integración cloud y modernización progresiva de servicios.",
+        ],
+      },
+      {
         role: "Appointmetly — Desarrollador Backend (Golang/Python)",
         date: "Feb 2024 – Mar 2026",
         achievements: [
@@ -111,6 +123,11 @@ export const es: Translations = {
     title: "Portafolio",
     description: "Algunos de los proyectos en los que he trabajado como desarrollador privado y freelance.",
     projects: [
+      {
+        title: "VIMIFOS — Migración Legacy PHP a TypeScript",
+        desc: "Proyecto privado. Migración progresiva de sistemas legacy en PHP hacia TypeScript, Lambdas y mini microservicios. Implementación de JWT, Amazon Cognito, validaciones con Zod, acceso a datos con Kysely, PostgreSQL y DynamoDB.",
+        tags: ["TypeScript", "AWS Lambda", "Cognito", "JWT", "Zod", "Kysely", "PostgreSQL", "DynamoDB"],
+      },
       {
         title: "Appointmetly - Gestión de Citas empresariales",
         desc: "Lideré el diseño y desarrollo de +30 APIs REST con arquitectura modular en Go/Python. Optimización de consultas SQL y JSONB, cobertura de pruebas superior al 95% con Testify/SQLMock. Monitoreo con Prometheus y Loki.",

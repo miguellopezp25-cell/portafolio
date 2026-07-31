@@ -25,6 +25,7 @@ const repoLink = { label: "Código fuente", url: "https://github.com/miguellopez
 const profileLink = { label: "Código fuente", url: "https://github.com/miguellopezp25-cell", icon: "github" as const };
 
 const projectMeta: (Pick<Project, "links" | "image" | "colors">)[] = [
+  { colors: ["rgb(19,78,74)", "rgb(45,212,191)"] },
   { colors: ["rgb(147,51,234)", "rgb(0,255,255)"] },
   { links: [profileLink], colors: ["rgb(0,255,100)", "rgb(0,100,255)"] },
   { links: [profileLink], colors: ["rgb(255,100,0)", "rgb(255,0,200)"] },

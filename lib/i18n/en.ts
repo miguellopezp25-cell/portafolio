@@ -13,7 +13,7 @@ export const en: Translations = {
     visitors: "Visitors",
   },
   hero: {
-    badge: "Available for projects",
+    badge: "Currently unavailable",
     name: "Miguel Angel Lopez Puebla",
     title: "Backend Engineer specialized in Go",
     titleAccent: "Flexible across other technologies",
@@ -72,6 +72,18 @@ export const en: Translations = {
     ],
     experienceList: [
       {
+        role: "VIMIFOS — Backend Engineer",
+        date: "Jul 2026 – Present",
+        achievements: [
+          "Working on migrating legacy PHP systems into TypeScript backend services.",
+          "Designing and implementing lambdas and small microservices to separate system responsibilities.",
+          "Implementing authentication and authorization with JWT and Amazon Cognito.",
+          "Validating contracts and input data with Zod to improve security and maintainability.",
+          "Building data access with Kysely over PostgreSQL and complementary models in DynamoDB.",
+          "Contributing to architecture improvements, cloud integration, and progressive service modernization.",
+        ],
+      },
+      {
         role: "Appointmetly — Backend Developer (Golang/Python)",
         date: "Feb 2024 – Mar 2026",
         achievements: [
@@ -111,6 +123,11 @@ export const en: Translations = {
     title: "Portfolio",
     description: "Some of the projects I've worked on as a private and freelance developer.",
     projects: [
+      {
+        title: "VIMIFOS — Legacy PHP to TypeScript Migration",
+        desc: "Private project. Progressive migration of legacy PHP systems into TypeScript, Lambdas, and small microservices. Implementation of JWT, Amazon Cognito, Zod validations, data access with Kysely, PostgreSQL, and DynamoDB.",
+        tags: ["TypeScript", "AWS Lambda", "Cognito", "JWT", "Zod", "Kysely", "PostgreSQL", "DynamoDB"],
+      },
       {
         title: "Appointmetly - Business Appointment Management",
         desc: "Led the design and development of 30+ REST APIs with modular architecture in Go/Python. SQL and JSONB query optimization, 95%+ test coverage with Testify/SQLMock. Monitoring with Prometheus and Loki.",
